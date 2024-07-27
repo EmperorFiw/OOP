@@ -69,61 +69,61 @@ public class PM {
         }
     }
 
-    public void fillR1()
-    {
-        Panel panelBtnLb = new Panel(new GridBagLayout()); // panel 1 ของ row-2   panel2 ช่องButton และ ตัวหนังสือ
+    public void fillR1() {
+        Panel panelBtnLb = new Panel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
         String[] names = {"0-9% of people are sick", "10-19% of people are sick", "20-99% of people are sick", "More than 30% of people are sick."};
         Color[] colors = {Color.GREEN, Color.YELLOW, Color.ORANGE, Color.RED};
-
+    
         for (int i = 0; i < 4; i++) {
             Button btnColor = new Button();
-            btnColor.setPreferredSize(new Dimension(30, 30));//size button
-            btnColor.setBackground(colors[i]); //set color
-            gbc.anchor = GridBagConstraints.WEST;
-            gbc.insets = new Insets(2, 0, 0, 10);
+            btnColor.setPreferredSize(new Dimension(30, 30));
+            btnColor.setBackground(colors[i]);
+            
             gbc.gridx = 0;
             gbc.gridy = i;
-            panelBtnLb.add(btnColor, gbc); // เพิ่มปุ่มเข้า panelBtnLb
-
-            Label lb = new Label(names[i]); // ใส่ชื่อ label
-            lb.setFont(new Font("Arial", Font.BOLD, 15)); // ปรับเป็นขนาด Font
+            gbc.anchor = GridBagConstraints.WEST;
+            gbc.insets = new Insets(2, 0, 2, 10);
+            panelBtnLb.add(btnColor, gbc);
+    
+            Label lb = new Label(names[i]);
+            lb.setFont(new Font("Arial", Font.BOLD, 15));
+            
             gbc.gridx = 1;
-            panelBtnLb.add(lb, gbc); // เพิ่ม text เข้า panelBtnLb
-
-
-
-            panelR1.add(panelBtnLb); // เพิ่ม panelBtnLb เข้า panelR1 |  panelR1 = null
-
+            gbc.insets = new Insets(2, 10, 2, 0);
+            panelBtnLb.add(lb, gbc);
         }
-
-        gbc.gridx = 0; //ตั้งค่าให้ชิดซ้าย
-        gbc.gridy = 0; 
-        panelR1.add(panelBtnLb, gbc); // เพิ่ม panelBtnLb เข้า panelR1
-
-        gbc.gridx = 1;
+    
+        // สร้าง panelR1 และ emptyCenter ก่อนหน้านี้
+        gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.weightx = 0.5; // ลดค่า weightx
+        gbc.fill = GridBagConstraints.HORIZONTAL; // กำหนดให้เต็มพื้นที่แนวนอน
+        panelR1.add(panelBtnLb, gbc);
+    
+        gbc.gridx = 1;
         gbc.weightx = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        panelR1.add(emptyCenter, gbc); // เพิ่ม emptyCenter เข้า panelR1 โดยให้ขยายเต็มพื้นที่
-
+        panelR1.add(emptyCenter, gbc);
+    
         addStatus();
-        gbc.gridx = 2; //ชิดขวา
-        gbc.gridy = 0;
-        gbc.weightx = 0; // รีเซ็ต weightx
+        gbc.gridx = 2;
+        gbc.weightx = 0;
+        gbc.fill = GridBagConstraints.NONE;
         panelR1.add(status, gbc);
-        
-
-
-        panel2.add(panelR1); 
+    
+        panel2.add(panelR1);
     }
+    
 
     public void addStatus() {
-        String[] texts = {"Kuy1", "Hee1", "Kuy2", "Hee2", "Kuy3", "Hee3"}; // ข้อความทั้งหมด 6 ข้อความ
-        String[] data = {"123", "123", "123", "123", "123", "1211331212313"};
+        String[] texts = {"Dust", "Poppulation", "Healthy", "Hee2", "Percent sicks"}; // ข้อความทั้งหมด 6 ข้อความ
+        String[] data = {"200000", "200000", "200000", "200000", "10%"};
 
         for (int i = 0; i < texts.length; i++) {
             gbc.gridx = 1;
             gbc.gridy = i;
+            gbc.fill = GridBagConstraints.WEST;
             Label lb = new Label(texts[i] + ": " + data[i]); // ใส่ชื่อ label
             lb.setFont(new Font("Arial", Font.BOLD, 15)); // ปรับเป็นขนาด Font
             status.add(lb, gbc); // เพิ่ม label เข้า panelR1
