@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Label;
 import java.awt.Panel;
+import java.awt.TextField;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -132,27 +133,54 @@ public class PM {
     
     public void fillR2() 
     {
-        gbc.anchor = GridBagConstraints.SOUTHWEST;
-        gbc.gridy = 1;
-        gbc.gridx = 1;
+
         Button btnSelect = new Button("SELECT FILE");
-        panelR2.add(btnSelect, gbc);
+        setButton(1, 1, 10, 60, btnSelect);
         
-        // ปรับ gridx เพื่อปรับตำแหน่งของปุ่มถัดไป
-        gbc.gridx = 2;
         Button btnInput = new Button("INPUT STATR");
-        panelR2.add(btnInput, gbc);
+        setButton(1, 2, 10, 60, btnInput);
         
-        gbc.gridx = 3;
         Button btnOutput = new Button("INPUT STOP");
-        panelR2.add(btnOutput, gbc);
+        setButton(1, 3, 10, 60, btnOutput);
         
-        gbc.gridx = 4;
         Button btnStart = new Button("OK");
-        panelR2.add(btnStart, gbc);
+        setButton(1, 4, 10, 60, btnStart);
+
+        Button rain = new Button("Rain");
+        setButton(0, 3, 10, 110, rain);
+
+        Button artificialaRain = new Button("artificiala Rain");
+        setButton(0, 4, 10, 60, artificialaRain);
+        
+        TextField tField1 = new TextField(null);
+        setText(tField1, 0, 1, 10, 200);
+        TextField tField2 = new TextField();
+        setText(tField2, 0, 2, 10, 125);
         
 
-        panel2.add(panelR1);
+    }
+    // ปรับปุ่ม
+    public void  setButton(int y, int x,int w,int h,Button button){
+        gbc.anchor = GridBagConstraints.SOUTHWEST;
+        gbc.insets = new Insets(5, 5, 10, 10); // เพิ่มระยะห่างรอบปุ่ม
+        // ปรับ ipad เพื่อปรับขนาดปุ่ม
+        gbc.ipadx = h;
+        gbc.ipady = w; 
+        gbc.gridy = y;// ปรับ gridy เพื่อปรับแถวของปุ่มถัดไป
+        gbc.gridx = x;// ปรับ gridx เพื่อปรับตำแหน่งของปุ่มถัดไป
+        panelR2.add(button, gbc);
+        panel2.add(panelR2);
+    }
+
+    public void setText(TextField tField,int y, int x,int w,int h){
+        gbc.anchor = GridBagConstraints.SOUTHWEST;
+        gbc.insets = new Insets(5, 5, 10, 10); // เพิ่มระยะห่างรอบ text 
+        // ปรับ ipad เพื่อปรับขนาด text 
+        gbc.ipadx = h;
+        gbc.ipady = w; 
+        gbc.gridy = y;// ปรับ gridy เพื่อปรับแถวของ text ถัดไป
+        gbc.gridx = x;// ปรับ gridx เพื่อปรับตำแหน่งของ text ถัดไป
+        panelR2.add(tField, gbc);
         panel2.add(panelR2);
     }
 }
