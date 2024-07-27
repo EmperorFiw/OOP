@@ -9,8 +9,6 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class MainPage extends Frame{
     
@@ -27,8 +25,10 @@ public class MainPage extends Frame{
     }
 
     public void showMainButton() {
-        Creator cr = new Creator();
         PM pm = new PM();
+        btnEvent be = new btnEvent();
+        Creator cr = new Creator();
+        
         Button btnStart = new Button("Start");
         Button btnCreator = new Button("Creator");
         GridBagConstraints gbc = new GridBagConstraints();
@@ -71,51 +71,8 @@ public class MainPage extends Frame{
         });
 
         //Event
-        btnStart.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {}
-
-            @Override
-            public void mousePressed(MouseEvent e) {}
-
-            @Override
-            public void mouseReleased(MouseEvent e) {}
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                // เปลี่ยนสีปุ่มเมื่อเมาส์เข้าไปในปุ่ม
-                btnStart.setBackground(Color.WHITE); 
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                //ออก
-                btnStart.setBackground(new Color(211, 211, 211)); 
-            }
-        });
-
-        btnCreator.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {}
-
-            @Override
-            public void mousePressed(MouseEvent e) {}
-
-            @Override
-            public void mouseReleased(MouseEvent e) {}
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                // เปลี่ยนสีปุ่มเมื่อเมาส์เข้าไปในปุ่ม
-                btnCreator.setBackground(Color.WHITE); 
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                //ออก; 
-                btnCreator.setBackground(new Color(211, 211, 211)); 
-            }
-        });
+        be.addMoseEventBtn(btnStart);
+        be.addMoseEventBtn(btnCreator);
     }
 }
 
