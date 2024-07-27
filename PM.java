@@ -146,14 +146,16 @@ public class PM {
         Button btnStart = new Button("OK");
         setButton(1, 4, 10, 60, btnStart);
 
-        Button rain = new Button("Rain");
+        Button rain = new Button("RAIN");
         setButton(0, 3, 10, 110, rain);
 
-        Button artificialaRain = new Button("artificiala Rain");
-        setButton(0, 4, 10, 60, artificialaRain);
+        Button aRain = new Button("ARTIFICIALA RAIN");
+        setButton(0, 4, 10, 60, aRain);
         
-        TextField tField1 = new TextField(null);
+        TextField tField1 = new TextField("FILE");
         setText(tField1, 0, 1, 10, 200);
+        tField1.setEditable(false);
+        
         TextField tField2 = new TextField();
         setText(tField2, 0, 2, 10, 125);
         
