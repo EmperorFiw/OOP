@@ -183,6 +183,6 @@ public class PM {
         gbc.gridy = y;// ปรับ gridy เพื่อปรับแถวของ text ถัดไป
         gbc.gridx = x;// ปรับ gridx เพื่อปรับตำแหน่งของ text ถัดไป
         panelR2.add(tField, gbc);
-        panel2.add(panelR2);
+        panel2.add(panelR2);//12
     }
 }
