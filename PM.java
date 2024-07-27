@@ -72,7 +72,7 @@ public class PM {
     public void fillR1()
     {
         Panel panelBtnLb = new Panel(new GridBagLayout()); // panel 1 ของ row-2   panel2 ช่องButton และ ตัวหนังสือ
-        String[] names = {"0-9% people are sick", "10-19% people are sick", "20-99% people are sick", "More than 30% people are sick."};
+        String[] names = {"0-9% of people are sick", "10-19% of people are sick", "20-99% of people are sick", "More than 30% of people are sick."};
         Color[] colors = {Color.GREEN, Color.YELLOW, Color.ORANGE, Color.RED};
 
         for (int i = 0; i < 4; i++) {
