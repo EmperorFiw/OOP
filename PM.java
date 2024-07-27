@@ -117,7 +117,7 @@ public class PM {
     
 
     public void addStatus() {
-        String[] texts = {"Dust", "Poppulation", "Healthy", "Hee2", "Percent sicks"}; // ข้อความทั้งหมด 6 ข้อความ
+        String[] texts = {"Dust", "Poppulation", "Healthy", "Parent", "Percent sicks"}; // ข้อความทั้งหมด 6 ข้อความ
         String[] data = {"200000", "200000", "200000", "200000", "10%"};
 
         for (int i = 0; i < texts.length; i++) {
