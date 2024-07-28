@@ -15,6 +15,9 @@ import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
 public class PM {
 
     GridBagConstraints gbc = new GridBagConstraints();
@@ -95,6 +98,8 @@ public class PM {
             gbc.insets = new Insets(2, 10, 2, 0);
             panelBtnLb.add(lb, gbc);
         }
+        
+
     
         // สร้าง panelR1 และ emptyCenter ก่อนหน้านี้
         gbc.gridx = 0;
@@ -103,17 +108,21 @@ public class PM {
         gbc.fill = GridBagConstraints.HORIZONTAL; // กำหนดให้เต็มพื้นที่แนวนอน
         panelR1.add(panelBtnLb, gbc);
     
-        gbc.gridx = 1;
+       /* gbc.gridx = 1;
         gbc.weightx = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        panelR1.add(emptyCenter, gbc);
-    
+        panelR1.add(emptyCenter, gbc);*/
+        ImageIcon icon = new ImageIcon("icon1.png");
+        JLabel background = new JLabel();
+        background.setIcon(icon);
+        panelR1.add(background);
+
         addStatus();
         gbc.gridx = 2;
         gbc.weightx = 0;
         gbc.fill = GridBagConstraints.NONE;
         panelR1.add(status, gbc);
-    
+        
         panel2.add(panelR1);
     }
     
