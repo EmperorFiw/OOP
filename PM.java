@@ -64,6 +64,7 @@ public class PM {
             for (int x=0;x<20;x++)
             {
                 btn[i][x] = new Button();
+                btn[i][x].setBackground(new Color(255, 255, 255)); 
                 panel1.add(btn[i][x]); //สร้าง area
             }
             
@@ -137,14 +138,14 @@ public class PM {
         Button btnSelect = new Button("SELECT FILE");
         setButton(1, 1, 10, 60, btnSelect);
         
-        Button btnInput = new Button("INPUT STATR");
-        setButton(1, 2, 10, 60, btnInput);
+       // Button btnInput = new Button("INPUT STATR");Clear data
+       // setButton(1, 2, 10, 60, btnInput);
         
-        Button btnOutput = new Button("INPUT STOP");
+        Button btnOutput = new Button("CLEAR DATA");
         setButton(1, 3, 10, 60, btnOutput);
         
         Button btnStart = new Button("OK");
-        setButton(1, 4, 10, 60, btnStart);
+        setButton(1, 2, 10, 60, btnStart);
 
         Button rain = new Button("RAIN");
         setButton(0, 3, 10, 110, rain);
