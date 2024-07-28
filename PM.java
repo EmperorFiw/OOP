@@ -71,7 +71,7 @@ public class PM {
             for (int x=0;x<20;x++)
             {
                 btn[i][x] = new Button();
-                btn[i][x].setBackground(new Color(255, 255, 255)); 
+                btn[i][x].setBackground(new Color(254, 194, 56)); 
                 panel1.add(btn[i][x]); //สร้าง area
             }
             
@@ -116,7 +116,7 @@ public class PM {
         gbc.weightx = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panelR1.add(emptyCenter, gbc);*/
-        ImageIcon icon = resizeIcon("icon1.png", 64, 64);
+        ImageIcon icon = resizeIcon("p3.png", 150, 150);
         JLabel background = new JLabel();
         background.setIcon(icon);
         panelR1.add(background);
