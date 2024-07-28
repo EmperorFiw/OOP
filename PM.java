@@ -14,7 +14,11 @@ import java.awt.TextField;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -112,7 +116,7 @@ public class PM {
         gbc.weightx = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panelR1.add(emptyCenter, gbc);*/
-        ImageIcon icon = new ImageIcon("icon1.png");
+        ImageIcon icon = resizeIcon("icon1.png", 64, 64);
         JLabel background = new JLabel();
         background.setIcon(icon);
         panelR1.add(background);
@@ -126,7 +130,17 @@ public class PM {
         panel2.add(panelR1);
     }
     
-
+    private static ImageIcon resizeIcon(String path, int width, int height) {
+        try {
+            BufferedImage img = ImageIO.read(new File(path));
+            Image resizedImage = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            return new ImageIcon(resizedImage);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
     public void addStatus() {
         String[] texts = {"Dust", "Poppulation", "Healthy", "Parent", "Percent sicks"}; // ข้อความทั้งหมด 6 ข้อความ
         String[] data = {"200000", "200000", "200000", "200000", "10%"};
