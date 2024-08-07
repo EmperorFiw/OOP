@@ -10,12 +10,22 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Label;
 import java.awt.Panel;
+import java.awt.TextField;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 public class PM {
 
+   
     GridBagConstraints gbc = new GridBagConstraints();
     Panel panel1 = new Panel(new GridLayout(10, 20)); // area 20*10
     Panel panel2 = new Panel(new GridLayout(2, 1)); // panel 2*1 box ครอบช่องที่2จาก setLayout row-2
@@ -63,67 +73,84 @@ public class PM {
             for (int x=0;x<20;x++)
             {
                 btn[i][x] = new Button();
+                btn[i][x].setBackground(new Color(254, 194, 56)); 
                 panel1.add(btn[i][x]); //สร้าง area
             }
             
         }
     }
 
-    public void fillR1()
-    {
-        Panel panelBtnLb = new Panel(new GridBagLayout()); // panel 1 ของ row-2   panel2 ช่องButton และ ตัวหนังสือ
+    public void fillR1() {
+        Panel panelBtnLb = new Panel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
         String[] names = {"0-9% of people are sick", "10-19% of people are sick", "20-99% of people are sick", "More than 30% of people are sick."};
         Color[] colors = {Color.GREEN, Color.YELLOW, Color.ORANGE, Color.RED};
-
+    
         for (int i = 0; i < 4; i++) {
             Button btnColor = new Button();
-            btnColor.setPreferredSize(new Dimension(30, 30));//size button
-            btnColor.setBackground(colors[i]); //set color
-            gbc.anchor = GridBagConstraints.WEST;
-            gbc.insets = new Insets(2, 0, 0, 10);
+            btnColor.setPreferredSize(new Dimension(30, 30));
+            btnColor.setBackground(colors[i]);
+            
             gbc.gridx = 0;
             gbc.gridy = i;
-            panelBtnLb.add(btnColor, gbc); // เพิ่มปุ่มเข้า panelBtnLb
-
-            Label lb = new Label(names[i]); // ใส่ชื่อ label
-            lb.setFont(new Font("Arial", Font.BOLD, 15)); // ปรับเป็นขนาด Font
+            gbc.anchor = GridBagConstraints.WEST;
+            gbc.insets = new Insets(2, 0, 2, 10);
+            panelBtnLb.add(btnColor, gbc);
+    
+            Label lb = new Label(names[i]);
+            lb.setFont(new Font("Arial", Font.BOLD, 15));
+            
             gbc.gridx = 1;
-            panelBtnLb.add(lb, gbc); // เพิ่ม text เข้า panelBtnLb
-
-
-
-            panelR1.add(panelBtnLb); // เพิ่ม panelBtnLb เข้า panelR1 |  panelR1 = null
-
+            gbc.insets = new Insets(2, 10, 2, 0);
+            panelBtnLb.add(lb, gbc);
         }
-
-        gbc.gridx = 0; //ตั้งค่าให้ชิดซ้าย
-        gbc.gridy = 0; 
-        panelR1.add(panelBtnLb, gbc); // เพิ่ม panelBtnLb เข้า panelR1
-
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        gbc.weightx = 1;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panelR1.add(emptyCenter, gbc); // เพิ่ม emptyCenter เข้า panelR1 โดยให้ขยายเต็มพื้นที่
-
-        addStatus();
-        gbc.gridx = 2; //ชิดขวา
-        gbc.gridy = 0;
-        gbc.weightx = 0; // รีเซ็ต weightx
-        panelR1.add(status, gbc);
         
 
+    
+        // สร้าง panelR1 และ emptyCenter ก่อนหน้านี้
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 0.5; // ลดค่า weightx
+        gbc.fill = GridBagConstraints.HORIZONTAL; // กำหนดให้เต็มพื้นที่แนวนอน
+        panelR1.add(panelBtnLb, gbc);
+    
+       /* gbc.gridx = 1;
+        gbc.weightx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        panelR1.add(emptyCenter, gbc);*/
+        ImageIcon icon = resizeIcon("", 150, 150);
+        JLabel background = new JLabel();
+        background.setIcon(icon);
+        panelR1.add(background);
 
-        panel2.add(panelR1); 
+        addStatus();
+        gbc.gridx = 2;
+        gbc.weightx = 0;
+        gbc.fill = GridBagConstraints.NONE;
+        panelR1.add(status, gbc);
+        
+        panel2.add(panelR1);
     }
-
+    
+    private static ImageIcon resizeIcon(String path, int width, int height) {
+        try {
+            BufferedImage img = ImageIO.read(new File(path));
+            Image resizedImage = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            return new ImageIcon(resizedImage);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
     public void addStatus() {
-        String[] texts = {"Kuy1", "Hee1", "Kuy2", "Hee2", "Kuy3", "Hee3"}; // ข้อความทั้งหมด 6 ข้อความ
-        String[] data = {"123", "123", "123", "123", "123", "1211331212313"};
+        String[] texts = {"Dust", "Poppulation", "Healthy", "Parent", "Percent sicks"}; // ข้อความทั้งหมด 6 ข้อความ
+        String[] data = {"200000", "200000", "200000", "200000", "10%"};
 
         for (int i = 0; i < texts.length; i++) {
             gbc.gridx = 1;
             gbc.gridy = i;
+            gbc.fill = GridBagConstraints.WEST;
             Label lb = new Label(texts[i] + ": " + data[i]); // ใส่ชื่อ label
             lb.setFont(new Font("Arial", Font.BOLD, 15)); // ปรับเป็นขนาด Font
             status.add(lb, gbc); // เพิ่ม label เข้า panelR1
@@ -132,27 +159,75 @@ public class PM {
     
     public void fillR2() 
     {
-        gbc.anchor = GridBagConstraints.SOUTHWEST;
-        gbc.gridy = 1;
-        gbc.gridx = 1;
         Button btnSelect = new Button("SELECT FILE");
-        panelR2.add(btnSelect, gbc);
+        setButton(1, 1, 10, 60, btnSelect);// ปรับปุ่ม
+        setColorButton(btnSelect, 211, 211, 211, 255, 255, 255);//ปรับสีปุ่ม
         
-        // ปรับ gridx เพื่อปรับตำแหน่งของปุ่มถัดไป
-        gbc.gridx = 2;
-        Button btnInput = new Button("INPUT STATR");
-        panelR2.add(btnInput, gbc);
+        Button btnOutput = new Button("CLEAR DATA");
+        setButton(1, 3, 10, 60, btnOutput);// ปรับปุ่ม
+        setColorButton(btnOutput, 211, 211, 211, 255, 255, 255);//ปรับสีปุ่ม
         
-        gbc.gridx = 3;
-        Button btnOutput = new Button("INPUT STOP");
-        panelR2.add(btnOutput, gbc);
-        
-        gbc.gridx = 4;
         Button btnStart = new Button("OK");
-        panelR2.add(btnStart, gbc);
-        
+        setButton(1, 2, 10, 60, btnStart);// ปรับปุ่ม
+        setColorButton(btnStart, 211, 211, 211, 255, 255, 255);//ปรับสีปุ่ม
 
-        panel2.add(panelR1);
+        Button rain = new Button("RAIN");
+        setButton(0, 3, 10, 110, rain);// ปรับปุ่ม
+        setColorButton(rain, 211, 211, 211, 180, 232, 255);//ปรับสีปุ่ม
+
+        Button aRain = new Button("ARTIFICIALA RAIN");
+        setButton(0, 4, 10, 60, aRain);// ปรับปุ่ม
+        setColorButton(aRain, 211, 211, 211, 180, 232, 255); //ปรับสีปุ่ม
+        
+        TextField tField1 = new TextField("FILE");
+        setText(tField1, 0, 1, 10, 200);//ปรับ text
+        tField1.setEditable(false);// ห้ามเเก้ ไข text
+        
+        TextField tField2 = new TextField();
+        setText(tField2, 0, 2, 10, 125);//ปรับ text
+        
+    }
+
+    // click ปู่ม
+    public void click (Button button){
+        
+    }
+
+    //ปรับสีปุ่ม
+    public void setColorButton(Button button ,int r ,int g ,int b,int r2, int g2 ,int b2){
+
+        btnEvent BEvent = new btnEvent();
+
+        BEvent.MouseButtonColor(button, r, g, b, r2, g2, b2); // เปลี่ยนสีปุ่มเมื่อเมาส์เข้าไปในปุ่ม
+        button.setBackground(new Color(r,g,b)); // ปรับสีปุ่ม
+
+    }
+    // ปรับปุ่ม
+    public void  setButton(int y, int x,int w,int h,Button button){
+        gbc.anchor = GridBagConstraints.SOUTHWEST;
+        gbc.insets = new Insets(5, 5, 10, 10); // เพิ่มระยะห่างรอบปุ่ม
+        // ปรับ ipad เพื่อปรับขนาดปุ่ม
+        gbc.ipadx = h;
+        gbc.ipady = w; 
+        gbc.gridy = y;// ปรับ gridy เพื่อปรับแถวของปุ่มถัดไป
+        gbc.gridx = x;// ปรับ gridx เพื่อปรับตำแหน่งของปุ่มถัดไป
+        panelR2.add(button, gbc);
         panel2.add(panelR2);
     }
+
+    //ปรับ text
+    public void setText(TextField tField,int y, int x,int w,int h){
+        gbc.anchor = GridBagConstraints.SOUTHWEST;
+        gbc.insets = new Insets(5, 5, 10, 10); // เพิ่มระยะห่างรอบ text 
+        // ปรับ ipad เพื่อปรับขนาด text 
+        gbc.ipadx = h;
+        gbc.ipady = w; 
+        gbc.gridy = y;// ปรับ gridy เพื่อปรับแถวของ text ถัดไป
+        gbc.gridx = x;// ปรับ gridx เพื่อปรับตำแหน่งของ text ถัดไป
+        panelR2.add(tField, gbc);
+        panel2.add(panelR2);//12
+    }
+
+    
+
 }

@@ -19,7 +19,7 @@ public class Creator {
         frame = new Frame("Creator"); 
         Panel panel = new Panel(new GridBagLayout()); // ใช้ GridBagLayout
 
-        String[] names = {"Name: 1", "Name: 2", "Name: 3"};
+        String[] names = {"Name: 1", "Name: 2",};
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 1;
@@ -33,7 +33,7 @@ public class Creator {
         frame.setBackground(new Color(211, 211, 211)); 
         frame.setLocationRelativeTo(null);
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < names.length; i++) {
             Label lb = new Label(names[i]); //ใส่ชื่อ label
             lb.setFont(new Font("Arial", Font.BOLD, 60)); // ปรับเป็นขนาด Font 
             gbc.gridy = i; // ตำแหน่งrow
