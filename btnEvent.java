@@ -7,7 +7,7 @@ import java.awt.event.MouseListener;
 public class btnEvent {
     PM pm = new PM();
 
-    void addMoseEventBtn(Button btn) {
+    void addMoseEventBtn(Button btn, int r, int g, int b) {
         btn.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {}
@@ -21,13 +21,13 @@ public class btnEvent {
             @Override
             public void mouseEntered(MouseEvent e) {
                 // เปลี่ยนสีปุ่มเมื่อเมาส์เข้าไปในปุ่ม
-                btn.setBackground(Color.WHITE); 
+                btn.setBackground(Color.WHITE);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 //ออก
-                btn.setBackground(new Color(211, 211, 211)); 
+                btn.setBackground(new Color(r, g, b)); 
             }
 
         });

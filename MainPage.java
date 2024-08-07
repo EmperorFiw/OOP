@@ -71,8 +71,8 @@ public class MainPage extends Frame{
         });
 
         //Event
-        be.addMoseEventBtn(btnStart);
-        be.addMoseEventBtn(btnCreator);
+        be.addMoseEventBtn(btnStart,211,211,211);
+        be.addMoseEventBtn(btnCreator,211,211,211);
     }
 }
 
