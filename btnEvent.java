@@ -32,4 +32,31 @@ public class btnEvent {
 
         });
     }
+
+    void MouseButtonColor (Button btn, int r, int g, int b ,int r2 ,int g2 ,int b2){
+
+        btn.addMouseListener(new MouseListener(){
+            @Override
+            public void mouseClicked(MouseEvent e) {}
+
+            @Override
+            public void mousePressed(MouseEvent e) {}
+
+            @Override
+            public void mouseReleased(MouseEvent e) {}
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                // เปลี่ยนสีปุ่มเมื่อเมาส์เข้าไปในปุ่ม
+                btn.setBackground(new Color(r2, g2, b2));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                //ออก
+                btn.setBackground(new Color(r, g, b)); 
+            }
+
+        });
+    }
 }

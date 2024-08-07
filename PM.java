@@ -17,14 +17,15 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class PM {
 
-    btnEvent BEvent = new btnEvent();
+   
     GridBagConstraints gbc = new GridBagConstraints();
     Panel panel1 = new Panel(new GridLayout(10, 20)); // area 20*10
     Panel panel2 = new Panel(new GridLayout(2, 1)); // panel 2*1 box ครอบช่องที่2จาก setLayout row-2
@@ -117,7 +118,7 @@ public class PM {
         gbc.weightx = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panelR1.add(emptyCenter, gbc);*/
-        ImageIcon icon = resizeIcon("p3.png", 150, 150);
+        ImageIcon icon = resizeIcon("", 150, 150);
         JLabel background = new JLabel();
         background.setIcon(icon);
         panelR1.add(background);
@@ -158,37 +159,47 @@ public class PM {
     
     public void fillR2() 
     {
-
         Button btnSelect = new Button("SELECT FILE");
-        setButton(1, 1, 10, 60, btnSelect);
-        BEvent.addMoseEventBtn(btnSelect, 211, 211, 211);
-        
-       // Button btnInput = new Button("INPUT STATR");Clear data
-       // setButton(1, 2, 10, 60, btnInput);
+        setButton(1, 1, 10, 60, btnSelect);// ปรับปุ่ม
+        setColorButton(btnSelect, 211, 211, 211, 255, 255, 255);//ปรับสีปุ่ม
         
         Button btnOutput = new Button("CLEAR DATA");
-        setButton(1, 3, 10, 60, btnOutput);
-        BEvent.addMoseEventBtn(btnOutput, 211, 211, 211);
+        setButton(1, 3, 10, 60, btnOutput);// ปรับปุ่ม
+        setColorButton(btnOutput, 211, 211, 211, 255, 255, 255);//ปรับสีปุ่ม
         
         Button btnStart = new Button("OK");
-        setButton(1, 2, 10, 60, btnStart);
-        BEvent.addMoseEventBtn(btnStart, 0, 0, 0);
+        setButton(1, 2, 10, 60, btnStart);// ปรับปุ่ม
+        setColorButton(btnStart, 211, 211, 211, 255, 255, 255);//ปรับสีปุ่ม
 
         Button rain = new Button("RAIN");
-        setButton(0, 3, 10, 110, rain);
-        BEvent.addMoseEventBtn(rain, 0, 0, 0);
+        setButton(0, 3, 10, 110, rain);// ปรับปุ่ม
+        setColorButton(rain, 211, 211, 211, 180, 232, 255);//ปรับสีปุ่ม
 
         Button aRain = new Button("ARTIFICIALA RAIN");
-        setButton(0, 4, 10, 60, aRain);
-        BEvent.addMoseEventBtn(aRain, 0, 0, 0);
+        setButton(0, 4, 10, 60, aRain);// ปรับปุ่ม
+        setColorButton(aRain, 211, 211, 211, 180, 232, 255); //ปรับสีปุ่ม
         
         TextField tField1 = new TextField("FILE");
-        setText(tField1, 0, 1, 10, 200);
-        tField1.setEditable(false);
+        setText(tField1, 0, 1, 10, 200);//ปรับ text
+        tField1.setEditable(false);// ห้ามเเก้ ไข text
         
         TextField tField2 = new TextField();
-        setText(tField2, 0, 2, 10, 125);
+        setText(tField2, 0, 2, 10, 125);//ปรับ text
         
+    }
+
+    // click ปู่ม
+    public void click (Button button){
+        
+    }
+
+    //ปรับสีปุ่ม
+    public void setColorButton(Button button ,int r ,int g ,int b,int r2, int g2 ,int b2){
+
+        btnEvent BEvent = new btnEvent();
+
+        BEvent.MouseButtonColor(button, r, g, b, r2, g2, b2); // เปลี่ยนสีปุ่มเมื่อเมาส์เข้าไปในปุ่ม
+        button.setBackground(new Color(r,g,b)); // ปรับสีปุ่ม
 
     }
     // ปรับปุ่ม
@@ -204,6 +215,7 @@ public class PM {
         panel2.add(panelR2);
     }
 
+    //ปรับ text
     public void setText(TextField tField,int y, int x,int w,int h){
         gbc.anchor = GridBagConstraints.SOUTHWEST;
         gbc.insets = new Insets(5, 5, 10, 10); // เพิ่มระยะห่างรอบ text 
@@ -215,4 +227,7 @@ public class PM {
         panelR2.add(tField, gbc);
         panel2.add(panelR2);//12
     }
+
+    
+
 }
