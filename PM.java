@@ -24,6 +24,7 @@ import javax.swing.JLabel;
 
 public class PM {
 
+    btnEvent BEvent = new btnEvent();
     GridBagConstraints gbc = new GridBagConstraints();
     Panel panel1 = new Panel(new GridLayout(10, 20)); // area 20*10
     Panel panel2 = new Panel(new GridLayout(2, 1)); // panel 2*1 box ครอบช่องที่2จาก setLayout row-2
@@ -160,21 +161,26 @@ public class PM {
 
         Button btnSelect = new Button("SELECT FILE");
         setButton(1, 1, 10, 60, btnSelect);
+        BEvent.addMoseEventBtn(btnSelect, 211, 211, 211);
         
        // Button btnInput = new Button("INPUT STATR");Clear data
        // setButton(1, 2, 10, 60, btnInput);
         
         Button btnOutput = new Button("CLEAR DATA");
         setButton(1, 3, 10, 60, btnOutput);
+        BEvent.addMoseEventBtn(btnOutput, 211, 211, 211);
         
         Button btnStart = new Button("OK");
         setButton(1, 2, 10, 60, btnStart);
+        BEvent.addMoseEventBtn(btnStart, 0, 0, 0);
 
         Button rain = new Button("RAIN");
         setButton(0, 3, 10, 110, rain);
+        BEvent.addMoseEventBtn(rain, 0, 0, 0);
 
         Button aRain = new Button("ARTIFICIALA RAIN");
         setButton(0, 4, 10, 60, aRain);
+        BEvent.addMoseEventBtn(aRain, 0, 0, 0);
         
         TextField tField1 = new TextField("FILE");
         setText(tField1, 0, 1, 10, 200);
