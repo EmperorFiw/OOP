@@ -12,24 +12,20 @@ import java.awt.Label;
 import java.awt.Panel;
 import java.awt.TextField;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 
 public class PM {
-
-   
+    MainPage mp = new MainPage();
+    Frame frame = new Frame("Main Program");
+    Button [][] btn = new Button[10][20];
     GridBagConstraints gbc = new GridBagConstraints();
     Panel panel1 = new Panel(new GridLayout(10, 20)); // area 20*10
     Panel panel2 = new Panel(new GridLayout(2, 1)); // panel 2*1 box ครอบช่องที่2จาก setLayout row-2
@@ -40,9 +36,6 @@ public class PM {
     
     
     public void showPM() {
-
-        MainPage mp = new MainPage();
-        Frame frame = new Frame("Main Program");
 
         Image icon = Toolkit.getDefaultToolkit().getImage("icon.png");
         frame.setIconImage(icon);
@@ -71,16 +64,15 @@ public class PM {
 
     public void setArea()
     {
-        Button [][] btn = new Button[10][20];
         for (int i=0;i<10;i++)
         {
             for (int x=0;x<20;x++)
             {
                 btn[i][x] = new Button();
-                btn[i][x].setBackground(new Color(254, 194, 56)); 
+                btn[i][x].setBackground(new Color(255, 255, 255)); 
                 panel1.add(btn[i][x]); //สร้าง area
+                panel1.removeAll();
             }
-            
         }
     }
 
@@ -118,11 +110,7 @@ public class PM {
         gbc.fill = GridBagConstraints.HORIZONTAL; // กำหนดให้เต็มพื้นที่แนวนอน
         panelR1.add(panelBtnLb, gbc);
     
-       /* gbc.gridx = 1;
-        gbc.weightx = 1;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panelR1.add(emptyCenter, gbc);*/
-        ImageIcon icon = resizeIcon("", 150, 150);
+        ImageIcon icon = resizeIcon("p1.png", 150, 150);
         JLabel background = new JLabel();
         background.setIcon(icon);
         panelR1.add(background);
@@ -167,21 +155,21 @@ public class PM {
         setButton(1, 1, 10, 60, btnSelect);// ปรับปุ่ม
         setColorButton(btnSelect, 211, 211, 211, 255, 255, 255);//ปรับสีปุ่ม
         
-        Button btnOutput = new Button("CLEAR DATA");
-        setButton(1, 3, 10, 60, btnOutput);// ปรับปุ่ม
-        setColorButton(btnOutput, 211, 211, 211, 255, 255, 255);//ปรับสีปุ่ม
+        Button btnClear = new Button("CLEAR DATA");
+        setButton(1, 3, 10, 60, btnClear);// ปรับปุ่ม
+        setColorButton(btnClear, 211, 211, 211, 255, 255, 255);//ปรับสีปุ่ม
         
-        Button btnStart = new Button("OK");
-        setButton(1, 2, 10, 60, btnStart);// ปรับปุ่ม
-        setColorButton(btnStart, 211, 211, 211, 255, 255, 255);//ปรับสีปุ่ม
+        Button btnOK = new Button("OK");
+        setButton(1, 2, 10, 60, btnOK);// ปรับปุ่ม
+        setColorButton(btnOK, 211, 211, 211, 255, 255, 255);//ปรับสีปุ่ม
 
-        Button rain = new Button("RAIN");
-        setButton(0, 3, 10, 110, rain);// ปรับปุ่ม
-        setColorButton(rain, 211, 211, 211, 180, 232, 255);//ปรับสีปุ่ม
+        Button btnRain = new Button("Rain");
+        setButton(0, 3, 10, 110, btnRain);// ปรับปุ่ม
+        setColorButton(btnRain, 211, 211, 211, 180, 232, 255);//ปรับสีปุ่ม
 
-        Button aRain = new Button("ARTIFICIALA RAIN");
-        setButton(0, 4, 10, 60, aRain);// ปรับปุ่ม
-        setColorButton(aRain, 211, 211, 211, 180, 232, 255); //ปรับสีปุ่ม
+        Button btnARain = new Button("ARTIFICIALA RAIN");
+        setButton(0, 4, 10, 60, btnARain);// ปรับปุ่ม
+        setColorButton(btnARain, 211, 211, 211, 180, 232, 255); //ปรับสีปุ่ม
         
         TextField tField1 = new TextField("FILE");
         setText(tField1, 0, 1, 10, 200);//ปรับ text
@@ -190,53 +178,13 @@ public class PM {
         TextField tField2 = new TextField();
         setText(tField2, 0, 2, 10, 125);//ปรับ text
         
+        btnEvent event = new btnEvent();
 
-        ///////////////////////////////////////////////////////////////////GPT 
-        btnSelect.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser();
-                int result = fileChooser.showOpenDialog(null);
-
-                if (result == JFileChooser.APPROVE_OPTION) {
-                    // รับไฟล์ที่เลือกมาเก็บในตัวแปร
-                    String selectedFilePath = fileChooser.getSelectedFile().getAbsolutePath();
-
-                    String[][] dataGrid = new String[10][20]; // สร้างอาร์เรย์ 2 มิติขนาด 10x20 เพื่อเก็บข้อมูลจากไฟล์
-
-                    try (BufferedReader br = new BufferedReader(new FileReader(selectedFilePath))) {
-                        String line; // ตัวแปรเพื่อเก็บแต่ละบรรทัดที่อ่านมาจากไฟล์
-                        int row = 0; // ตัวแปรเพื่อระบุแถวใน dataGrid ที่กำลังจัดการ
-                    
-                        while ((line = br.readLine()) != null && row < 10) { // อ่านไฟล์ทีละบรรทัดจนกว่าจะหมด หรือจนกว่าแถวจะครบ 10 แถว
-                            String[] numbers = line.split("\t"); // แยกบรรทัดที่อ่านมาเป็นส่วนๆ โดยใช้แท็บเป็นตัวคั่น
-                            for (int col = 0; col < numbers.length && col < 20; col++) { // วนลูปตามจำนวนคอลัมน์ในบรรทัดหรือจนกว่าจะครบ 20 คอลัมน์
-                                dataGrid[row][col] = numbers[col]; // เก็บข้อมูลแต่ละส่วนใน dataGrid ตำแหน่งที่สอดคล้องกัน
-                            }
-                            row++; // เพิ่มค่า row เพื่อไปจัดการแถวถัดไปใน dataGrid
-                        }
-                    } catch (IOException ex) {
-                        ex.printStackTrace(); // ถ้าเกิดข้อผิดพลาดในการอ่านไฟล์ จะพิมพ์รายละเอียดของข้อผิดพลาดออกมาในคอนโซล
-                    }
-                    
-
-                    // แสดงผลในคอนโซล (สามารถเปลี่ยนเป็นแสดงใน GUI)
-                    for (String[] row : dataGrid) {
-                        for (String element : row) {
-                            System.out.print(element + " "); /// element คือเลขที่นำเข้าจากไฟล์  ////////// + " " คือเว้นช่องให้มัน
-                        }
-                        System.out.println(); //เว้นบรรทัด
-                    }
-                }
-            }
-        });
-
-        /////////////////////////////////////////////////////////////////////จบ GPT
-    }
-
-    // click ปู่ม
-    public void click (Button button){
-        
+        event.OnClick(btnSelect, 1);
+        event.OnClick(btnClear, 2);
+        event.OnClick(btnOK, 3);
+        event.OnClick(btnRain, 4);
+        event.OnClick(btnARain, 5);
     }
 
     //ปรับสีปุ่ม
@@ -274,8 +222,12 @@ public class PM {
         panel2.add(panelR2);//12
     }
 
+    ///////////////////////////////////////////////////////////////ปัญหามันไม่เปลี่ยนสี ลบไม่ออก////////////////////////////////////////
+    public void clearBox() {
+        panel1.removeAll(); // ลบปุ่มทั้งหมด
+        panel1.revalidate(); // รีเฟรช layout ของ panel1
+        panel1.repaint();    // รีเฟรช panel1
 
-    
-    
+    }
 
 }
