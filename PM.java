@@ -177,7 +177,7 @@ public class PM {
 
     public void fillR2() 
     {
-        
+        int Default = 0;
         setButton(1, 1, 10, 60, btnSelect);// ปรับปุ่ม
         setColorButton(btnSelect, 211, 211, 211, 255, 255, 255);//ปรับสีปุ่ม
         
@@ -198,13 +198,14 @@ public class PM {
         tField1.setEditable(false);// ห้ามเเก้ ไข text
         
         setText(tField2, 0, 2, 10, 125);//ปรับ text
-       
+
+        
         btnSelect.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
                 int result = fileChooser.showOpenDialog(null);
-    
+                
                 if (result == JFileChooser.APPROVE_OPTION) {
                     // รับไฟล์ที่เลือกมาเก็บในตัวแปร
                     String selectedFilePath = fileChooser.getSelectedFile().getAbsolutePath();
@@ -235,12 +236,13 @@ public class PM {
                             index++; // เพิ่ม index เพื่อเก็บค่าในตำแหน่งถัดไป
                             
                         }
-                        
                         pmProcess();
                     }
-                }       
+                }
+                     
             }
         });
+        
         btnOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 String s = tField2.getText();
@@ -254,9 +256,9 @@ public class PM {
                 clearArea();
             }
         });
-        
         setPeople(5000);
     }
+
     //ปรับสีปุ่ม
     public void setColorButton(Button button ,int r ,int g ,int b,int r2, int g2 ,int b2){
 
@@ -306,19 +308,18 @@ public class PM {
         }
         tField1.setText("");
     }
-
     public void setPeople(int addpeople)
     {
         int pop = 0;
         for (int i = 0; i < 10; i++) {
             for (int x = 0; x < 20; x++) {
                 Random random = new Random();
-                int randomNumber = addpeople + random.nextInt(1000);
+                int randomNumber = (addpeople - random.nextInt(1000)) + random.nextInt(1000);
                 people[i][x] = randomNumber;
                 pop += randomNumber;
             }
         }
-        updateLabel(1, "Population : " + pop);
+        //updateLabel(1, "Population : " + pop);
     }
 
     public void pmProcess()
