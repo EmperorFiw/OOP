@@ -53,6 +53,9 @@ public class PM {
     HashMap<Integer, String> pmValue = new HashMap<>();
     int people[][] = new int[10][20];
     int dust[][] = new int[10][20];
+    double VGA[][] = new double[10][20];
+    double Healthy[][] = new double[10][20];
+    int Parent[][] = new int[10][20];
     
     public void showPM() {
 
@@ -240,6 +243,7 @@ public class PM {
         });
 
         setPeople();
+        setParen();
     }
 
     //ปรับสีปุ่ม
@@ -282,6 +286,9 @@ public class PM {
             for (int x = 0; x < 20; x++) {
                 if (btn[i][x] != null) { // ตรวจสอบว่าไม่เป็น null ก่อน
                     btn[i][x].setBackground(Color.WHITE); 
+                    people[i][x] = 0;
+                    dust[i][x] = 0;
+                    Parent[i][x] = 0;
                 }
             }
         }
@@ -298,13 +305,46 @@ public class PM {
         for (int i = 0; i < 10; i++) {
             for (int x = 0; x < 20; x++) {
                 Random random = new Random();
-                int randomNumber = 5000 + random.nextInt(1000);
+                int randomNumber = (random.nextInt((5000 - 4000) + 1) + 4000 )+(random.nextInt(1000));
                 people[i][x] = randomNumber;
-                pop += randomNumber;
+                pop += people[i][x];
+                
             }
         }
         updateLabel(1, "Population : " + pop);
     }
+
+    public void setParen(){
+        Random random = new Random();
+        int po = 0;
+        for (int i = 0; i < 10; i++) {
+            for (int x = 0; x < 20; x++) {
+                int value = Integer.parseInt(getDust(i,x));
+                if(value >= 0 && value <=50 ){
+                    int randomSicks = (int) (Math.random() * 10);
+                    Parent[i][x] = people[i][x] * (randomSicks / 100);
+                    po += (int)Parent[i][x];
+                }
+                if( value >= 51 && value <= 100 ){
+                    int randomSicks = random.nextInt((19 - 0) + 1) + 10;
+                    Parent[i][x] = people[i][x] * (randomSicks / 100);
+                    po += (int)Parent[i][x];
+                }
+                if( value >= 51 && value <= 100 ){
+                    int randomSicks = random.nextInt((29 - 20) +1) + 20;
+                    Parent[i][x] = people[i][x] * (randomSicks / 100);
+                    po += (int)Parent[i][x];
+                }
+                else{
+                    int randomSicks = random.nextInt((90 - 30)+ 1) + 30;
+                    Parent[i][x] = people[i][x] * (randomSicks / 100);
+                    po += (int)Parent[i][x];
+                }
+            }
+        }
+        updateLabel(3, "Parent : " + po);
+    }
+
     public void pmProcess()
     {
         int row = 0, col = 0;
@@ -316,9 +356,9 @@ public class PM {
 
                 if (value >= 0 && value <= 50) {
                     colorName = "GREEN"; // 0-9%
-                } else if (value >= 50 && value <= 100) {
+                } else if (value >= 51 && value <= 100) {
                     colorName = "YELLOW"; // 10-19%
-                } else if (value > 100 && value <= 150) {
+                } else if (value > 101 && value <= 150) {
                     colorName = "ORANGE"; // 20-29%
                 } else {
                     colorName = "RED"; // มากกว่า 30%
@@ -378,6 +418,11 @@ public class PM {
     public String getDust(int r, int c) {
         return String.valueOf(dust[r][c]);
     }
+    public int getParent(int r, int c) {
+        int P = Parent[r][c];
+        return P;
+    }
+    
 }
 
 class ButtonClickListener implements ActionListener {
@@ -395,5 +440,8 @@ class ButtonClickListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         pm.updateLabel(0, "Dust : " + pm.getDust(row, col));
         pm.updateLabel(1, "Population : " + pm.getPeple(row, col));
+        pm.updateLabel(3, "Parent : " + pm.getParent(row, col));
     }
+
+    
 }
