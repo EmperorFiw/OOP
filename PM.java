@@ -322,7 +322,7 @@ public class PM {
                 String colorName;
                 Random random = new Random();
 
-                if (col > 19) {
+                if (col > 19) { //จัดการ array ให้เป้น row 10* col 20
                     col = 0;
                     row++;
                     if (row >= 10) { 
@@ -350,6 +350,7 @@ public class PM {
                     int randomSicks = random.nextInt(61) + 30; 
                     Parent[row][col] = (int) Math.round(people[row][col] * (randomSicks / 100.0));
                 }
+                
                 Healthy[row][col] = people[row][col]-Parent[row][col]; // หาจำนวนผู้ป่วย
                 Avg[row][col] = (Parent[row][col] / (double) people[row][col]) * 100; //หาค่าเฉลี่ย ผู้ป่วย/จำนวนประชากร
                 dust[row][col] = value; //ค่าPM
