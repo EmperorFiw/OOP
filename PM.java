@@ -352,7 +352,7 @@ public class PM {
                 }
                 Healthy[row][col] = people[row][col]-Parent[row][col]; // หาจำนวนผู้ป่วย
                 Avg[row][col] = (Parent[row][col] / (double) people[row][col]) * 100; //หาค่าเฉลี่ย ผู้ป่วย/จำนวนประชากร
-                dust[row][col] = value;
+                dust[row][col] = value; //ค่าPM
                 showAreaColor(row, col, colorName);
                 col ++;
             } catch (NumberFormatException e) {
@@ -404,7 +404,7 @@ public class PM {
         return String.valueOf(Healthy[r][c]);
     }
     public String getPercent(int r, int c) { 
-        DecimalFormat df = new DecimalFormat("0.00"); 
+        DecimalFormat df = new DecimalFormat("0.00"); //แปลงเป็นทศนิยม 2 ตำแหน่ง
         return df.format(Avg[r][c]); //to string
     }
 }
@@ -422,7 +422,7 @@ class ButtonClickListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        pm.updateLabel(0, "Dust : " + pm.getDust(row, col));
+        pm.updateLabel(0, "Dust : " + pm.getDust(row, col)); //ดึงdustจาก array row col
         pm.updateLabel(1, "Population : " + pm.getPeple(row, col));
         pm.updateLabel(2, "Healthy : " + pm.getHealthy(row, col));
         pm.updateLabel(3, "Parent : " + pm.getParent(row, col));
