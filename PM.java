@@ -14,6 +14,9 @@ import java.awt.TextField;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
@@ -21,6 +24,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.rmi.AccessException;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -194,8 +198,7 @@ public class PM {
         tField1.setEditable(false);// ห้ามเเก้ ไข text
         
         setText(tField2, 0, 2, 10, 125);//ปรับ text
-    
-
+       
         btnSelect.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -232,21 +235,28 @@ public class PM {
                             index++; // เพิ่ม index เพื่อเก็บค่าในตำแหน่งถัดไป
                             
                         }
+                        
                         pmProcess();
                     }
                 }       
             }
         });
-        
+        btnOK.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                String s = tField2.getText();
+                int x = Integer.parseInt(s);
+                setPeople(x);
+            }
+        });
+
         btnClear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 clearArea();
             }
         });
-
-        setPeople();
+        
+        setPeople(5000);
     }
-
     //ปรับสีปุ่ม
     public void setColorButton(Button button ,int r ,int g ,int b,int r2, int g2 ,int b2){
 
@@ -268,7 +278,7 @@ public class PM {
         panelR2.add(button, gbc);
         panel2.add(panelR2);
     }
-
+    
     //ปรับ text
     public void setText(TextField tField,int y, int x,int w,int h){
         gbc.anchor = GridBagConstraints.SOUTHWEST;
@@ -297,13 +307,13 @@ public class PM {
         tField1.setText("");
     }
 
-    public void setPeople()
+    public void setPeople(int addpeople)
     {
         int pop = 0;
         for (int i = 0; i < 10; i++) {
             for (int x = 0; x < 20; x++) {
                 Random random = new Random();
-                int randomNumber = 5000 + random.nextInt(1000);
+                int randomNumber = addpeople + random.nextInt(1000);
                 people[i][x] = randomNumber;
                 pop += randomNumber;
             }
@@ -334,6 +344,10 @@ public class PM {
                     colorName = "GREEN"; // 0-9%
                     int randomSicks = (int) (Math.random() * 10); 
                     Parent[row][col] = (int) Math.round(people[row][col] * (randomSicks / 100.0));
+                    ImageIcon icon = resizeIcon("p1.png", 150, 150);
+                     JLabel background = new JLabel();
+                     background.setIcon(icon);
+                     panelR1.add(background);
                 
                 } else if (value > 50 && value <= 100) {
                     colorName = "YELLOW"; // 10-19%
