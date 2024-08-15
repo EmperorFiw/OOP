@@ -39,7 +39,7 @@ public class PM {
     Button btnARain = new Button("ARTIFICIALA RAIN");
     Label[] labels; // อาร์เรย์สำหรับเก็บ Label
     String[] texts = {"Dust", "Population", "Healthy", "Parent", "Percent sicks"};
-    String[] data = {"1000", "0", "0", "0", "0%"};
+    String[] data = {"0", "0", "0", "0", "0%"};
     TextField tField1 = new TextField("");
     TextField tField2 = new TextField();
     Button [][] btn = new Button[10][20];
@@ -285,11 +285,6 @@ public class PM {
                 }
             }
         }
-        for (int i=0;i < labels.length;i++)
-        {
-            updateLabel(i, texts[i]+" : " +data[i]);
-        }
-        tField1.setText("");
     }
 
     public void setPeople()
@@ -360,6 +355,7 @@ public class PM {
 
     public void updateLabel(int index, String newText) {
         if (labels == null) {
+            System.err.println("Labels array is not initialized. Please call addStatus() first.");
             return;
         }
         
@@ -369,14 +365,15 @@ public class PM {
             System.err.println("Index out of bounds");
         }
     }
-    
 
     public int getPeple(int r, int c)
     {   
         return people[r][c];
     }
-    public String getDust(int r, int c) {
-        return String.valueOf(dust[r][c]);
+    public int getDust(int r, int c)
+    {
+        System.out.print(r+" "+c+" "+dust);
+        return dust[r][c];
     }
 }
 
