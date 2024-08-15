@@ -39,7 +39,7 @@ public class PM {
     Button btnARain = new Button("ARTIFICIALA RAIN");
     Label[] labels; // อาร์เรย์สำหรับเก็บ Label
     String[] texts = {"Dust", "Population", "Healthy", "Parent", "Percent sicks"};
-    String[] data = {"1000", "0", "0", "0", "0%"};
+    String[] data = {"0", "0", "0", "0", "0%"};
     TextField tField1 = new TextField("");
     TextField tField2 = new TextField();
     Button [][] btn = new Button[10][20];
