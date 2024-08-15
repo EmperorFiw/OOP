@@ -242,7 +242,7 @@ public class PM {
             }
         });
 
-        setPeople();
+        setPeople();/////////////////////////+++++++++++++++++++++
         setParen();
     }
 
@@ -313,7 +313,7 @@ public class PM {
         }
         updateLabel(1, "Population : " + pop);
     }
-
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     public void setParen(){
         Random random = new Random();
         int po = 0;
@@ -344,7 +344,7 @@ public class PM {
         }
         updateLabel(3, "Parent : " + po);
     }
-
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     public void pmProcess()
     {
         int row = 0, col = 0;
@@ -418,10 +418,12 @@ public class PM {
     public String getDust(int r, int c) {
         return String.valueOf(dust[r][c]);
     }
+    //+++++++++
     public int getParent(int r, int c) {
         int P = Parent[r][c];
         return P;
     }
+    //++++++++++++++++
     
 }
 
@@ -440,7 +442,7 @@ class ButtonClickListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         pm.updateLabel(0, "Dust : " + pm.getDust(row, col));
         pm.updateLabel(1, "Population : " + pm.getPeple(row, col));
-        pm.updateLabel(3, "Parent : " + pm.getParent(row, col));
+        pm.updateLabel(3, "Parent : " + pm.getParent(row, col));//++++++++++++++++++++++++
     }
 
     
