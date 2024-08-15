@@ -325,29 +325,29 @@ public class PM {
                 if (col > 19) {
                     col = 0;
                     row++;
-                    if (row >= 10) { // ตรวจสอบว่า row ไม่เกินขนาด
+                    if (row >= 10) { 
                         break;
                     }
                 }
 
                 if (value >= 0 && value <= 50) {
                     colorName = "GREEN"; // 0-9%
-                    int randomSicks = (int) (Math.random() * 10); // Random value between 0 and 9
+                    int randomSicks = (int) (Math.random() * 10); 
                     Parent[row][col] = (int) Math.round(people[row][col] * (randomSicks / 100.0));
                 
                 } else if (value > 50 && value <= 100) {
                     colorName = "YELLOW"; // 10-19%
-                    int randomSicks = random.nextInt(10) + 10; // Random value between 10 and 19
+                    int randomSicks = random.nextInt(10) + 10; 
                     Parent[row][col] = (int) Math.round(people[row][col] * (randomSicks / 100.0));
                 
                 } else if (value > 100 && value <= 150) {
                     colorName = "ORANGE"; // 20-29%
-                    int randomSicks = random.nextInt(10) + 20; // Random value between 20 and 29
+                    int randomSicks = random.nextInt(10) + 20; 
                     Parent[row][col] = (int) Math.round(people[row][col] * (randomSicks / 100.0));
                 
                 } else {
                     colorName = "RED"; // More than 30%
-                    int randomSicks = random.nextInt(61) + 30; // Random value between 30 and 90
+                    int randomSicks = random.nextInt(61) + 30; 
                     Parent[row][col] = (int) Math.round(people[row][col] * (randomSicks / 100.0));
                 }
                 Healthy[row][col] = people[row][col]-Parent[row][col]; // หาจำนวนผู้ป่วย
