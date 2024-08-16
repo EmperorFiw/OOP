@@ -19,14 +19,14 @@ public class Creator {
         frame = new Frame("Creator"); 
         Panel panel = new Panel(new GridBagLayout()); // ใช้ GridBagLayout
 
-        String[] names = {"Name: 1", "Name: 2",};
+        String[] names = {"Thewaphithak Butkhot", "Student ID: 66011212091","NAME 2","NUMBER"};
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.insets = new Insets(50, 10, 10, 10);
 
-        Image icon = Toolkit.getDefaultToolkit().getImage("icon.png");
+        Image icon = Toolkit.getDefaultToolkit().getImage("img/icon.png");
         frame.setIconImage(icon);
         frame.setLayout(new GridBagLayout());
         frame.setSize(800, 700);
@@ -37,6 +37,7 @@ public class Creator {
             Label lb = new Label(names[i]); //ใส่ชื่อ label
             lb.setFont(new Font("Arial", Font.BOLD, 60)); // ปรับเป็นขนาด Font 
             gbc.gridy = i; // ตำแหน่งrow
+            gbc.anchor = GridBagConstraints.NORTH;
             panel.add(lb, gbc);
         }
 

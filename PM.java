@@ -44,7 +44,7 @@ public class PM {
     TextField tField1 = new TextField("");
     TextField tField2 = new TextField();
     Button [][] btn = new Button[10][20];
-    ImageIcon icon = resizeIcon("p1.png", 150, 150);
+    ImageIcon icon = resizeIcon("img/p1.png", 150, 150);
     JLabel background = new JLabel();
     GridBagConstraints gbc = new GridBagConstraints();
     Panel panel1 = new Panel(new GridLayout(10, 20)); // area 20*10
@@ -64,7 +64,7 @@ public class PM {
 
     public void showPM() {
 
-        Image icon = Toolkit.getDefaultToolkit().getImage("icon.png");
+        Image icon = Toolkit.getDefaultToolkit().getImage("img/icon.png");
         frame.setIconImage(icon);
         frame.setBackground(new Color(211, 211, 211)); 
         frame.setSize(1000, 700);
@@ -267,7 +267,7 @@ public class PM {
                     ep.showERROR();
                 }
                 ImageIcon icon = null;
-                icon = resizeIcon("pop.png", 150, 150);
+                icon = resizeIcon("img/pop.png", 150, 150);
                 if (icon != null) {
                     background.setIcon(icon); // เปลี่ยนไอคอนของ JLabel ที่มีอยู่
                     panelR1.revalidate();
@@ -285,7 +285,7 @@ public class PM {
         btnRain.addActionListener(new ActionListener() { 
             public void actionPerformed(ActionEvent e) {
                 ImageIcon icon = null;
-                icon = resizeIcon("rain.png", 150, 150);
+                icon = resizeIcon("img/rain.png", 150, 150);
                 if (icon != null) {
                     background.setIcon(icon); // เปลี่ยนไอคอนของ JLabel ที่มีอยู่
                     panelR1.revalidate();
@@ -300,7 +300,7 @@ public class PM {
         btnARain.addActionListener(new ActionListener() { 
             public void actionPerformed(ActionEvent e) {
                 ImageIcon icon = null;
-                icon = resizeIcon("rain.png", 150, 150);
+                icon = resizeIcon("img/rain.png", 150, 150);
                 if (icon != null) {
                     background.setIcon(icon); // เปลี่ยนไอคอนของ JLabel ที่มีอยู่
                     panelR1.revalidate();
@@ -522,13 +522,13 @@ public class PM {
         ImageIcon icon = null;
     
         if (value >= 0 && value <= 9) {
-            icon = resizeIcon("p1.png", 150, 150);
+            icon = resizeIcon("img/p1.png", 150, 150);
         } else if (value >= 10 && value <= 19) {
-            icon = resizeIcon("p2.png", 150, 150);
+            icon = resizeIcon("img/p2.png", 150, 150);
         } else if (value >= 20 && value <= 29) {
-            icon = resizeIcon("p3.png", 150, 150);
+            icon = resizeIcon("img/p3.png", 150, 150);
         } else if (value >= 30) {
-            icon = resizeIcon("p4.png", 150, 150);
+            icon = resizeIcon("img/p4.png", 150, 150);
         }
     
         if (icon != null) {

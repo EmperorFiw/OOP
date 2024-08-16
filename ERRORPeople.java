@@ -26,7 +26,7 @@ public class ERRORPeople {
         gbc.gridy = 0;
         gbc.insets = new Insets(20, 10, 10, 10);
 
-        Image icon = Toolkit.getDefaultToolkit().getImage("p4.png");
+        Image icon = Toolkit.getDefaultToolkit().getImage("img/p4.png");
         frame.setIconImage(icon);
         frame.setLayout(new GridBagLayout());
         frame.setSize(400, 350);
@@ -50,7 +50,7 @@ public class ERRORPeople {
             @Override
             public void windowClosing(WindowEvent e) {
                 frame.dispose(); // ปิด Frame (Destroy)
-                mp.showPM();
+                //mp.showPM();
                 Page.setPage(3);
             }
         });

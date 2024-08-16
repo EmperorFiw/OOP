@@ -18,7 +18,7 @@ public class MainPage extends Frame{
         setLocationRelativeTo(null);
         addWindowListener(new close());
         setLayout(new GridBagLayout());
-        Image icon = Toolkit.getDefaultToolkit().getImage("icon.png");
+        Image icon = Toolkit.getDefaultToolkit().getImage("img/icon.png");
         setIconImage(icon);
         setBackground(new Color(54, 54, 54));
         showMainButton();
