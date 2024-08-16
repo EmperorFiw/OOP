@@ -35,6 +35,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 public class PM {
+    ERRORPeople ep = new ERRORPeople();
     MainPage mp = new MainPage();
     Frame frame = new Frame("Main Program");
     Button btnSelect = new Button("SELECT FILE");
@@ -180,8 +181,7 @@ public class PM {
         int Default = 0;
         setButton(1, 1, 10, 60, btnSelect);// ปรับปุ่ม
         setColorButton(btnSelect, 211, 211, 211, 255, 255, 255);//ปรับสีปุ่ม
-        
-        
+
         setButton(1, 3, 10, 60, btnClear);// ปรับปุ่ม
         setColorButton(btnClear, 211, 211, 211, 255, 255, 255);//ปรับสีปุ่ม
         
@@ -247,7 +247,13 @@ public class PM {
             public void actionPerformed(ActionEvent e){
                 String s = tField2.getText();
                 int x = Integer.parseInt(s);
-                setPeople(x);
+                if(x < 1){
+                    Page.setPage(2);
+                    ep.showERRORNUMBER();
+                }
+                else{
+                    setPeople(x);
+                }
             }
         });
 
@@ -319,7 +325,7 @@ public class PM {
                 pop += randomNumber;
             }
         }
-        //updateLabel(1, "Population : " + pop);
+        //updateLabel(1, "Population : " + "0");
     }
 
     public void pmProcess()
