@@ -26,7 +26,7 @@ public class ERRORPeople {
         gbc.gridy = 0;
         gbc.insets = new Insets(20, 10, 10, 10);
 
-        Image icon = Toolkit.getDefaultToolkit().getImage("icon.png");
+        Image icon = Toolkit.getDefaultToolkit().getImage("p4.png");
         frame.setIconImage(icon);
         frame.setLayout(new GridBagLayout());
         frame.setSize(400, 350);
