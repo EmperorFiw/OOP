@@ -19,7 +19,7 @@ public class Creator {
         frame = new Frame("Creator"); 
         Panel panel = new Panel(new GridBagLayout()); // ใช้ GridBagLayout
 
-        String[] names = {"Thewaphithak Butkhot", "Student ID: 66011212091","NAME 2","NUMBER"};
+        String[] names = {"Thewaphithak Butkhot", "Student ID: 66011212091","Amonthep Jannan","Student ID: 66011212276"};
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 1;
