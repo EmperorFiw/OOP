@@ -35,7 +35,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 public class PM {
-    ERRORPeople ep = new ERRORPeople();
+    ERRORPeople ep = new ERRORPeople();////////////////////////////////////////++++++++++++++++++++
     MainPage mp = new MainPage();
     Frame frame = new Frame("Main Program");
     Button btnSelect = new Button("SELECT FILE");
@@ -178,7 +178,6 @@ public class PM {
 
     public void fillR2() 
     {
-        int Default = 0;
         setButton(1, 1, 10, 60, btnSelect);// ปรับปุ่ม
         setColorButton(btnSelect, 211, 211, 211, 255, 255, 255);//ปรับสีปุ่ม
 
@@ -242,7 +241,7 @@ public class PM {
                      
             }
         });
-        
+        ///////////////////////////////////////////////////////////////////////////////////////////
         btnOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 String s = tField2.getText();
@@ -256,13 +255,13 @@ public class PM {
                 }
             }
         });
-
+        ///////////////////////////////////////////////////////////////////////////////////////////
         btnClear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 clearArea();
             }
         });
-        setPeople(5000);
+        setPeople(5000);/////////////////+++++++++++++++
     }
 
     //ปรับสีปุ่ม
@@ -320,7 +319,7 @@ public class PM {
         for (int i = 0; i < 10; i++) {
             for (int x = 0; x < 20; x++) {
                 Random random = new Random();
-                int randomNumber = (addpeople - random.nextInt(1000)) + random.nextInt(1000);
+                int randomNumber = (addpeople - random.nextInt(1000)) + random.nextInt(1000);////////////////////////// ตรง addpeole
                 people[i][x] = randomNumber;
                 pop += randomNumber;
             }
