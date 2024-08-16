@@ -15,7 +15,7 @@ public class ERRORPeople {
     private Frame frame; 
 
     public void showERROR() {
-       PM mp = new PM(); // obj MainPage
+       //PM mp = new PM(); 
         frame = new Frame("ERROR"); 
         Panel panel = new Panel(new GridBagLayout()); // ใช้ GridBagLayout
 
