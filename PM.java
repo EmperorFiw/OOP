@@ -59,6 +59,7 @@ public class PM {
     int Healthy[][] = new int[10][20];
     int Parent[][] = new int[10][20];
     double Avg[][] = new double[10][20];
+    int clickPosition[] = new int[2];
     
 
     public void showPM() {
@@ -238,7 +239,7 @@ public class PM {
                         }
                     }
                 }
-                     
+                pmProcess();
             }
         });
         //////// OK
@@ -292,8 +293,21 @@ public class PM {
                 }
                 //Random random;
                 int randomRain = (int) (Math.random() * 3) + 1;
-
                 rain(randomRain);
+            }
+        });
+        /// ARain
+        btnARain.addActionListener(new ActionListener() { 
+            public void actionPerformed(ActionEvent e) {
+                ImageIcon icon = null;
+                icon = resizeIcon("rain.png", 150, 150);
+                if (icon != null) {
+                    background.setIcon(icon); // เปลี่ยนไอคอนของ JLabel ที่มีอยู่
+                    panelR1.revalidate();
+                    panelR1.repaint();
+                }
+                aRain();
+                pmProcess();
             }
         });
         setPeople(0);/////// set start 0
@@ -347,7 +361,7 @@ public class PM {
                 }
             }
         }
-        pmValue.replaceAll((key, oldValue) -> "0");
+        pmValue.clear();
 
         for (int i=0;i < labels.length;i++)
         {
@@ -476,8 +490,6 @@ public class PM {
     }
 
     public int getDust(int r, int c) {
-        /*if (getPeople(r, c) == 0)
-            return 0;*/
         return dust[r][c]; 
     }
 
@@ -528,7 +540,7 @@ public class PM {
 
     public void rain(int rand)
     {
-        for (int l=1;l!=rand;l++)
+        for (int l=0;l<rand;l++)
         {
             int key = 0;
             for (int i = 0; i < 10; i++) {
@@ -550,7 +562,39 @@ public class PM {
         pmProcess();
     }
     
-    
+    public void setPosition(int row, int col)
+    {
+        clickPosition[0] = row;
+        clickPosition[1] = col;
+    }
+
+    public void aRain()
+    {
+        dust[clickPosition[0]][clickPosition[1]] = (int)(dust[clickPosition[0]][clickPosition[1]] * 0.5);
+        int clickKey = clickPosition[0] * 20 + clickPosition[1]; // สร้าง `key` สำหรับตำแหน่ง clickPosition
+        if (pmValue.containsKey(clickKey)) {
+            // อัปเดตค่าใน pmValue สำหรับ clickPosition
+            pmValue.replace(clickKey, Integer.toString(dust[clickPosition[0]][clickPosition[1]]));
+        }
+        
+        for (int x = clickPosition[0] - 1; x <= clickPosition[0] + 1; x++) {
+            for (int y = clickPosition[1] - 1; y <= clickPosition[1] + 1; y++) {
+                // ตรวจสอบขอบเขตของ array และข้ามตำแหน่งที่เป็น clickPosition เอง
+                if (x >= 0 && x < 10 && y >= 0 && y < 20 && !(x == clickPosition[0] && y == clickPosition[1])) {
+
+                    dust[x][y] = (int)(dust[x][y] * 0.3);
+                    if (dust[x][y] < 0)
+                        dust[x][y] = 0;
+
+                    int key = x * 20 + y;
+                    if (pmValue.containsKey(key)) {
+                        // อัปเดตค่าใน pmValue
+                        pmValue.replace(key, Integer.toString(dust[x][y]));
+                    }
+                }
+            }
+        }
+    }
 }
 
 class ButtonClickListener implements ActionListener { //area
@@ -572,6 +616,7 @@ class ButtonClickListener implements ActionListener { //area
         pm.updateLabel(3, "Parent : " + pm.getParent(row, col));
         pm.updateLabel(4, "Sicks : " + pm.getPercent(row, col) + "%  ");
         pm.setEmoji(row, col);
+        pm.setPosition(row, col);
 
     }
 }
