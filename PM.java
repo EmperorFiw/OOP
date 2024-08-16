@@ -570,7 +570,8 @@ public class PM {
 
     public void aRain()
     {
-        dust[clickPosition[0]][clickPosition[1]] = (int)(dust[clickPosition[0]][clickPosition[1]] * 0.5);
+        int pmSelectDown = (int)(dust[clickPosition[0]][clickPosition[1]] * 0.5);
+        dust[clickPosition[0]][clickPosition[1]] = dust[clickPosition[0]][clickPosition[1]] - pmSelectDown;
         int clickKey = clickPosition[0] * 20 + clickPosition[1]; // สร้าง `key` สำหรับตำแหน่ง clickPosition
         if (pmValue.containsKey(clickKey)) {
             // อัปเดตค่าใน pmValue สำหรับ clickPosition
@@ -582,7 +583,8 @@ public class PM {
                 // ตรวจสอบขอบเขตของ array และข้ามตำแหน่งที่เป็น clickPosition เอง
                 if (x >= 0 && x < 10 && y >= 0 && y < 20 && !(x == clickPosition[0] && y == clickPosition[1])) {
 
-                    dust[x][y] = (int)(dust[x][y] * 0.3);
+                    int pmDown = (int)(dust[x][y] * 0.3);
+                    dust[x][y] = dust[x][y] - pmDown;
                     if (dust[x][y] < 0)
                         dust[x][y] = 0;
 
