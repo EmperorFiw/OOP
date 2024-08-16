@@ -16,7 +16,7 @@ public class ERRORPeople {
 
     public void showERROR() {
        PM mp = new PM(); // obj MainPage
-        frame = new Frame("Creator"); 
+        frame = new Frame("ERROR"); 
         Panel panel = new Panel(new GridBagLayout()); // ใช้ GridBagLayout
 
         String[] names = {"ERROR", "The number of people must be in numbers. ","The number of people must be greater than 0."};
