@@ -219,16 +219,23 @@ public class PM {
                     } catch (IOException ex) {
                         ex.printStackTrace(); // ถ้าเกิดข้อผิดพลาดในการอ่านไฟล์ จะพิมพ์รายละเอียดของข้อผิดพลาดออกมาในคอนโซล
                     }
-                    
+
+                    int maxSize = 200;
                     int index = 0;
 
                     for (String[] row : dataGrid) {
                         for (String element : row) {
-                            pmValue.put(index, element); // เก็บค่าลงในแฮชแมป pmValue โดยใช้ index เป็นคีย์
-                            index++; // เพิ่ม index เพื่อเก็บค่าในตำแหน่งถัดไป
-                            
+                            // ตรวจสอบจำนวนคีย์ใน HashMap ก่อนการเพิ่ม
+                            if (pmValue.size() < maxSize) {
+                                pmValue.put(index, element); // เก็บค่าลงในแฮชแมป pmValue โดยใช้ index เป็นคีย์
+                                index++; // เพิ่ม index เพื่อเก็บค่าในตำแหน่งถัดไป
+                            } else {
+                                break; // ออกจากลูปหากถึงขีดจำกัด
+                            }
                         }
-                        pmProcess();
+                        if (pmValue.size() >= maxSize) {
+                            break; // ออกจากลูปหลักหากถึงขีดจำกัด
+                        }
                     }
                 }
                      
@@ -258,6 +265,13 @@ public class PM {
                     Page.setPage(2);
                     ep.showERROR();
                 }
+                ImageIcon icon = null;
+                icon = resizeIcon("pop.png", 150, 150);
+                if (icon != null) {
+                    background.setIcon(icon); // เปลี่ยนไอคอนของ JLabel ที่มีอยู่
+                    panelR1.revalidate();
+                    panelR1.repaint();
+                }
             }
         });
         /////// clear
@@ -269,7 +283,17 @@ public class PM {
         /// rain
         btnRain.addActionListener(new ActionListener() { 
             public void actionPerformed(ActionEvent e) {
-                rain();
+                ImageIcon icon = null;
+                icon = resizeIcon("rain.png", 150, 150);
+                if (icon != null) {
+                    background.setIcon(icon); // เปลี่ยนไอคอนของ JLabel ที่มีอยู่
+                    panelR1.revalidate();
+                    panelR1.repaint();
+                }
+                //Random random;
+                int randomRain = (int) (Math.random() * 3) + 1;
+
+                rain(randomRain);
             }
         });
         setPeople(0);/////// set start 0
@@ -502,25 +526,27 @@ public class PM {
         }
     }
 
-    public void rain()
+    public void rain(int rand)
     {
-        int key = 0;
-        for (int i = 0; i < 10; i++) {
-            for (int x = 0; x < 20; x++) {
-                dust[i][x] -= 50;
-                if (dust[i][x] < 0)
-                {
-                    dust[i][x] = 0; //fix < 0
+        for (int l=1;l!=rand;l++)
+        {
+            int key = 0;
+            for (int i = 0; i < 10; i++) {
+                for (int x = 0; x < 20; x++) {
+                    dust[i][x] -= 50;
+                    if (dust[i][x] < 0)
+                    {
+                        dust[i][x] = 0; //fix < 0
+                    }
+                    // อัปเดตค่าใน pmValue ตามค่าใน dust และ key
+                    if (pmValue.containsKey(key)) {
+                        // อัปเดตค่าใน pmValue
+                        pmValue.replace(key, Integer.toString(dust[i][x]));
+                    }
+                    key++; // เพิ่ม key เพื่อให้ไม่ซ้ำกัน
                 }
-                // อัปเดตค่าใน pmValue ตามค่าใน dust และ key
-                if (pmValue.containsKey(key)) {
-                    // อัปเดตค่าใน pmValue
-                    pmValue.replace(key, Integer.toString(dust[i][x]));
-                }
-                key++; // เพิ่ม key เพื่อให้ไม่ซ้ำกัน
             }
         }
-        
         pmProcess();
     }
     
