@@ -14,9 +14,6 @@ import java.awt.TextField;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
@@ -24,7 +21,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.rmi.AccessException;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -256,6 +252,7 @@ public class PM {
                         break;
                     }
                 }
+                pmProcess(); // process when change population
                 
                 if(x != 0){
                     setPeople(x);
@@ -272,7 +269,7 @@ public class PM {
                 clearArea();
             }
         });
-        setPeople(0);/////////////////+++++++++++++++
+        setPeople(0);/////// set start 0
     }
 
     //ปรับสีปุ่ม
@@ -326,13 +323,18 @@ public class PM {
     }
     public void setPeople(int addpeople)
     {
-        int pop = 0;
+        //int pop = 0;
         for (int i = 0; i < 10; i++) {
             for (int x = 0; x < 20; x++) {
+                if (addpeople == 0)
+                {
+                    people[i][x] = 0;
+                    break;
+                }
                 Random random = new Random();
                 int randomNumber = (addpeople - random.nextInt(1000)) + random.nextInt(1000);////////////////////////// ตรง addpeole
                 people[i][x] = randomNumber;
-                pop += randomNumber;
+                //pop += randomNumber;
             }
         }
         //updateLabel(1, "Population : " + "0");
@@ -422,20 +424,28 @@ public class PM {
         }
     }
     
-    public int getPeple(int r, int c)
+    public String getPeople(int r, int c)
     {   
-        return people[r][c];
+        return String.valueOf(people[r][c]);
     }
     public String getDust(int r, int c) {
+        if (getPeople(r, c) == "0")
+            return "0";
         return String.valueOf(dust[r][c]); // แปลงค่า int เป็น String และ return
     }
     public String getParent(int r, int c) {
+        if (getPeople(r, c) == "0")
+            return "0";
         return String.valueOf(Parent[r][c]);
     }
     public String getHealthy(int r, int c) {
+        if (getPeople(r, c) == "0")
+            return "0";
         return String.valueOf(Healthy[r][c]);
     }
     public String getPercent(int r, int c) { 
+        if (getPeople(r, c) == "0")
+            return "0";
         DecimalFormat df = new DecimalFormat("0.00"); //แปลงเป็นทศนิยม 2 ตำแหน่ง
         return df.format(Avg[r][c]); //to string
     }
@@ -455,7 +465,7 @@ class ButtonClickListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         pm.updateLabel(0, "Dust : " + pm.getDust(row, col)); //ดึงdustจาก array row col
-        pm.updateLabel(1, "Population : " + pm.getPeple(row, col));
+        pm.updateLabel(1, "Population : " + pm.getPeople(row, col));
         pm.updateLabel(2, "Healthy : " + pm.getHealthy(row, col));
         pm.updateLabel(3, "Parent : " + pm.getParent(row, col));
         pm.updateLabel(4, "Sicks : " + pm.getPercent(row, col) + "%  ");
