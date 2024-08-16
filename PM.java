@@ -245,13 +245,24 @@ public class PM {
         btnOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 String s = tField2.getText();
-                int x = Integer.parseInt(s);
-                if(x < 1){
-                    Page.setPage(2);
-                    ep.showERRORNUMBER();
+                char[] ch = s.toCharArray();
+                int x = 0;
+                for (int i = 0; i < ch.length; i++) {
+                    if (Character.isDigit(ch[i])) {
+                        x = Integer.parseInt(s);
+                    }
+                    else{
+                        x = 0;
+                        break;
+                    }
+                }
+                
+                if(x != 0){
+                    setPeople(x);
                 }
                 else{
-                    setPeople(x);
+                    Page.setPage(2);
+                    ep.showERROR();
                 }
             }
         });
