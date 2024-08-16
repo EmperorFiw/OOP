@@ -21,7 +21,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -45,6 +44,8 @@ public class PM {
     TextField tField1 = new TextField("");
     TextField tField2 = new TextField();
     Button [][] btn = new Button[10][20];
+    ImageIcon icon = resizeIcon("p1.png", 150, 150);
+    JLabel background = new JLabel();
     GridBagConstraints gbc = new GridBagConstraints();
     Panel panel1 = new Panel(new GridLayout(10, 20)); // area 20*10
     Panel panel2 = new Panel(new GridLayout(2, 1)); // panel 2*1 box ครอบช่องที่2จาก setLayout row-2
@@ -65,7 +66,7 @@ public class PM {
         Image icon = Toolkit.getDefaultToolkit().getImage("icon.png");
         frame.setIconImage(icon);
         frame.setBackground(new Color(211, 211, 211)); 
-        frame.setSize(800, 700);
+        frame.setSize(1000, 700);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new GridLayout(2, 1, 10, 10)); // layput background frame
 
@@ -124,8 +125,6 @@ public class PM {
             gbc.insets = new Insets(2, 10, 2, 0);
             panelBtnLb.add(lb, gbc);
         }
-        
-
     
         // สร้าง panelR1 และ emptyCenter ก่อนหน้านี้
         gbc.gridx = 0;
@@ -134,8 +133,6 @@ public class PM {
         gbc.fill = GridBagConstraints.HORIZONTAL; // กำหนดให้เต็มพื้นที่แนวนอน
         panelR1.add(panelBtnLb, gbc);
     
-        ImageIcon icon = resizeIcon("p1.png", 150, 150);
-        JLabel background = new JLabel();
         background.setIcon(icon);
         panelR1.add(background);
 
@@ -194,7 +191,7 @@ public class PM {
         
         setText(tField2, 0, 2, 10, 125);//ปรับ text
 
-        
+        // Select File
         btnSelect.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -237,7 +234,7 @@ public class PM {
                      
             }
         });
-        ///////////////////////////////////////////////////////////////////////////////////////////
+        //////// OK
         btnOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 String s = tField2.getText();
@@ -263,10 +260,16 @@ public class PM {
                 }
             }
         });
-        ///////////////////////////////////////////////////////////////////////////////////////////
+        /////// clear
         btnClear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 clearArea();
+            }
+        });
+        /// rain
+        btnRain.addActionListener(new ActionListener() { 
+            public void actionPerformed(ActionEvent e) {
+                rain();
             }
         });
         setPeople(0);/////// set start 0
@@ -312,9 +315,16 @@ public class PM {
             for (int x = 0; x < 20; x++) {
                 if (btn[i][x] != null) { // ตรวจสอบว่าไม่เป็น null ก่อน
                     btn[i][x].setBackground(Color.WHITE); 
+                    people[i][x] = 0;
+                    dust[i][x] = 0;
+                    Healthy[i][x] = 0;
+                    Parent[i][x] = 0;
+                    Avg[i][x] = 0;
                 }
             }
         }
+        pmValue.replaceAll((key, oldValue) -> "0");
+
         for (int i=0;i < labels.length;i++)
         {
             updateLabel(i, texts[i]+" : " +data[i]);
@@ -324,20 +334,28 @@ public class PM {
     public void setPeople(int addpeople)
     {
         //int pop = 0;
-        for (int i = 0; i < 10; i++) {
-            for (int x = 0; x < 20; x++) {
-                if (addpeople == 0)
+        int digitCount = String.valueOf(addpeople).length(); // นับจำนวนตัวเลข
+        int sum = (int) Math.pow(10, digitCount - 1); // ยกกำลัง (digitCount - 1 = จะได้เลขฐานมาแล้วเอา 10 ไปยกกำลัง)
+        
+        for (int i = 0; i < 10; i++)  // เช่น 5000 นี้ได้ 4 เอา 4-1 = 3 10 กำลัง 3  = 1000
+        {
+            for (int x = 0; x < 20; x++) 
+            {
+                if (addpeople == 0) 
                 {
                     people[i][x] = 0;
                     break;
                 }
+                
                 Random random = new Random();
-                int randomNumber = (addpeople - random.nextInt(1000)) + random.nextInt(1000);////////////////////////// ตรง addpeole
+                int randomNumber = addpeople + random.nextInt(sum); ///////////////////////////// ตรง addpeople
                 people[i][x] = randomNumber;
-                //pop += randomNumber;
             }
         }
-        //updateLabel(1, "Population : " + "0");
+        if (addpeople > 0)
+        {
+            pmProcess();
+        }
     }
 
     public void pmProcess()
@@ -359,14 +377,17 @@ public class PM {
                     }
                 }
 
+                if (value < 0 )
+                {
+                    value = 0; ////fix < 0
+                }
+                else if (value > 250)
+                    value = 250; // fix > 250
+
                 if (value >= 0 && value <= 50) {
                     colorName = "GREEN"; // 0-9%
                     int randomSicks = (int) (Math.random() * 10); 
                     Parent[row][col] = (int) Math.round(people[row][col] * (randomSicks / 100.0));
-                    ImageIcon icon = resizeIcon("p1.png", 150, 150);
-                     JLabel background = new JLabel();
-                     background.setIcon(icon);
-                     panelR1.add(background);
                 
                 } else if (value > 50 && value <= 100) {
                     colorName = "YELLOW"; // 10-19%
@@ -379,14 +400,15 @@ public class PM {
                     Parent[row][col] = (int) Math.round(people[row][col] * (randomSicks / 100.0));
                 
                 } else {
-                    colorName = "RED"; // More than 30%
-                    int randomSicks = random.nextInt(61) + 30; 
+                    colorName = "RED"; // More than 30% - 50%
+                    int randomSicks = random.nextInt(21) + 30; 
                     Parent[row][col] = (int) Math.round(people[row][col] * (randomSicks / 100.0));
                 }
                 
                 Healthy[row][col] = people[row][col]-Parent[row][col]; // หาจำนวนผู้ป่วย
                 Avg[row][col] = (Parent[row][col] / (double) people[row][col]) * 100; //หาค่าเฉลี่ย ผู้ป่วย/จำนวนประชากร
                 dust[row][col] = value; //ค่าPM
+
                 showAreaColor(row, col, colorName);
                 col ++;
             } catch (NumberFormatException e) {
@@ -424,34 +446,88 @@ public class PM {
         }
     }
     
-    public String getPeople(int r, int c)
+    public int getPeople(int r, int c)
     {   
-        return String.valueOf(people[r][c]);
+        return people[r][c];
     }
-    public String getDust(int r, int c) {
-        if (getPeople(r, c) == "0")
-            return "0";
-        return String.valueOf(dust[r][c]); // แปลงค่า int เป็น String และ return
+
+    public int getDust(int r, int c) {
+        /*if (getPeople(r, c) == 0)
+            return 0;*/
+        return dust[r][c]; 
     }
-    public String getParent(int r, int c) {
-        if (getPeople(r, c) == "0")
-            return "0";
-        return String.valueOf(Parent[r][c]);
+
+    public int getParent(int r, int c) {
+        if (getPeople(r, c) == 0)
+            return 0;
+        return Parent[r][c];
     }
-    public String getHealthy(int r, int c) {
-        if (getPeople(r, c) == "0")
-            return "0";
-        return String.valueOf(Healthy[r][c]);
+
+    public int getHealthy(int r, int c) {
+        if (getPeople(r, c) == 0)
+            return 0;
+        return Healthy[r][c];
     }
-    public String getPercent(int r, int c) { 
-        if (getPeople(r, c) == "0")
-            return "0";
-        DecimalFormat df = new DecimalFormat("0.00"); //แปลงเป็นทศนิยม 2 ตำแหน่ง
-        return df.format(Avg[r][c]); //to string
+
+    public Double getPercent(int r, int c) { 
+        if (getPeople(r, c) == 0) {
+            return 0.0;
+        }
+        Double value = Avg[r][c];
+        if (value == null || value.isNaN()) {
+            return 0.0;
+        }      
+        return Math.round(Avg[r][c] * 100.0) / 100.0;
     }
+
+    public void setEmoji(int r, int c) {
+        int value = (int) Math.round(getPercent(r, c));
+    
+        ImageIcon icon = null;
+    
+        if (value >= 0 && value <= 9) {
+            icon = resizeIcon("p1.png", 150, 150);
+        } else if (value >= 10 && value <= 19) {
+            icon = resizeIcon("p2.png", 150, 150);
+        } else if (value >= 20 && value <= 29) {
+            icon = resizeIcon("p3.png", 150, 150);
+        } else if (value >= 30) {
+            icon = resizeIcon("p4.png", 150, 150);
+        }
+    
+        if (icon != null) {
+            background.setIcon(icon); // เปลี่ยนไอคอนของ JLabel ที่มีอยู่
+            panelR1.revalidate();
+            panelR1.repaint();
+        }
+    }
+
+    public void rain()
+    {
+        int key = 0;
+        for (int i = 0; i < 10; i++) {
+            for (int x = 0; x < 20; x++) {
+                dust[i][x] -= 50;
+                if (dust[i][x] < 0)
+                {
+                    dust[i][x] = 0; //fix < 0
+                }
+                // อัปเดตค่าใน pmValue ตามค่าใน dust และ key
+                if (pmValue.containsKey(key)) {
+                    // อัปเดตค่าใน pmValue
+                    pmValue.replace(key, Integer.toString(dust[i][x]));
+                }
+                key++; // เพิ่ม key เพื่อให้ไม่ซ้ำกัน
+            }
+        }
+        
+        pmProcess();
+    }
+    
+    
 }
 
-class ButtonClickListener implements ActionListener {
+class ButtonClickListener implements ActionListener { //area
     private PM pm;
     private int row;
     private int col;
@@ -469,5 +545,7 @@ class ButtonClickListener implements ActionListener {
         pm.updateLabel(2, "Healthy : " + pm.getHealthy(row, col));
         pm.updateLabel(3, "Parent : " + pm.getParent(row, col));
         pm.updateLabel(4, "Sicks : " + pm.getPercent(row, col) + "%  ");
+        pm.setEmoji(row, col);
+
     }
 }
