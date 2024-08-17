@@ -30,7 +30,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 public class PM {
-    ERRORPeople ep = new ERRORPeople();////////////////////////////////////////++++++++++++++++++++
+    ERRORPeople ep = new ERRORPeople();
     MainPage mp = new MainPage();
     Frame frame = new Frame("Main Program");
     Button btnSelect = new Button("SELECT FILE");
@@ -47,9 +47,9 @@ public class PM {
     ImageIcon icon = resizeIcon("img/p1.png", 150, 150);
     JLabel background = new JLabel();
     GridBagConstraints gbc = new GridBagConstraints();
-    Panel panel1 = new Panel(new GridLayout(10, 20)); // area 20*10
-    Panel panel2 = new Panel(new GridLayout(2, 1)); // panel 2*1 box ครอบช่องที่2จาก setLayout row-2
-    Panel panelR1 = new Panel(new GridBagLayout()); //ครอบ R1 แบ่งเป็น3ส่วน ในเเนวนอน
+    Panel panel1 = new Panel(new GridLayout(10, 20));
+    Panel panel2 = new Panel(new GridLayout(2, 1)); 
+    Panel panelR1 = new Panel(new GridBagLayout()); 
     Panel panelR2 = new Panel(new GridBagLayout());
     Panel emptyCenter = new Panel();
     Panel status = new Panel(new GridBagLayout());
@@ -71,9 +71,9 @@ public class PM {
         frame.setLocationRelativeTo(null);
         frame.setLayout(new GridLayout(2, 1, 10, 10)); // layput background frame
 
-        setArea(); //สร้าตาราง 10*20
-        fillR1(); //สร้าง R1
-        fillR2(); //สร้าง R2
+        setArea(); 
+        fillR1(); 
+        fillR2(); 
 
         frame.add(panel1);
         frame.add(panel2);        
@@ -81,8 +81,8 @@ public class PM {
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                frame.dispose(); // ปิด Frame 
-                mp.showMain();//กลับหน้าหลัก
+                frame.dispose(); 
+                mp.showMain();
                 Page.setPage(1);
             }
         });
@@ -130,7 +130,7 @@ public class PM {
         // สร้าง panelR1 และ emptyCenter ก่อนหน้านี้
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.weightx = 0.5; // ลดค่า weightx
+        gbc.weightx = 0.5;
         gbc.fill = GridBagConstraints.HORIZONTAL; // กำหนดให้เต็มพื้นที่แนวนอน
         panelR1.add(panelBtnLb, gbc);
     
@@ -158,7 +158,7 @@ public class PM {
     }
     
     public void addStatus() {
-        labels = new Label[texts.length]; // สร้างอาร์เรย์ Label ขนาดเท่ากับ texts
+        labels = new Label[texts.length]; 
 
         for (int i = 0; i < texts.length; i++) {
             gbc.gridx = 1;
@@ -172,25 +172,25 @@ public class PM {
 
     public void fillR2() 
     {
-        setButton(1, 1, 10, 60, btnSelect);// ปรับปุ่ม
-        setColorButton(btnSelect, 211, 211, 211, 255, 255, 255);//ปรับสีปุ่ม
+        setButton(1, 1, 10, 60, btnSelect);
+        setColorButton(btnSelect, 211, 211, 211, 255, 255, 255);//
 
-        setButton(1, 3, 10, 60, btnClear);// ปรับปุ่ม
-        setColorButton(btnClear, 211, 211, 211, 255, 255, 255);//ปรับสีปุ่ม
+        setButton(1, 3, 10, 60, btnClear); 
+        setColorButton(btnClear, 211, 211, 211, 255, 255, 255);
         
-        setButton(1, 2, 10, 60, btnOK);// ปรับปุ่ม
-        setColorButton(btnOK, 211, 211, 211, 255, 255, 255);//ปรับสีปุ่ม
+        setButton(1, 2, 10, 60, btnOK);
+        setColorButton(btnOK, 211, 211, 211, 255, 255, 255);
 
-        setButton(0, 3, 10, 110, btnRain);// ปรับปุ่ม
-        setColorButton(btnRain, 211, 211, 211, 180, 232, 255);//ปรับสีปุ่ม
+        setButton(0, 3, 10, 110, btnRain);
+        setColorButton(btnRain, 211, 211, 211, 180, 232, 255);
 
-        setButton(0, 4, 10, 60, btnARain);// ปรับปุ่ม
-        setColorButton(btnARain, 211, 211, 211, 180, 232, 255); //ปรับสีปุ่ม
+        setButton(0, 4, 10, 60, btnARain);
+        setColorButton(btnARain, 211, 211, 211, 180, 232, 255); 
         
-        setText(tField1, 0, 1, 10, 200);//ปรับ text
-        tField1.setEditable(false);// ห้ามเเก้ ไข text
+        setText(tField1, 0, 1, 10, 200);
+        tField1.setEditable(false);
         
-        setText(tField2, 0, 2, 10, 125);//ปรับ text
+        setText(tField2, 0, 2, 10, 125);
 
         // Select File
         btnSelect.addActionListener(new ActionListener() {
@@ -200,25 +200,25 @@ public class PM {
                 int result = fileChooser.showOpenDialog(null);
                 
                 if (result == JFileChooser.APPROVE_OPTION) {
-                    // รับไฟล์ที่เลือกมาเก็บในตัวแปร
-                    String selectedFilePath = fileChooser.getSelectedFile().getAbsolutePath();
-                    tField1.setText(selectedFilePath); //set path file
 
-                    String[][] dataGrid = new String[10][20]; // สร้างอาร์เรย์ 2 มิติขนาด 10x20 เพื่อเก็บข้อมูลจากไฟล์
+                    String selectedFilePath = fileChooser.getSelectedFile().getAbsolutePath();
+                    tField1.setText(selectedFilePath); 
+
+                    String[][] dataGrid = new String[10][20]; 
     
                     try (BufferedReader br = new BufferedReader(new FileReader(selectedFilePath))) {
-                        String line; // ตัวแปรเพื่อเก็บแต่ละบรรทัดที่อ่านมาจากไฟล์
-                        int row = 0; // ตัวแปรเพื่อระบุแถวใน dataGrid ที่กำลังจัดการ
+                        String line; 
+                        int row = 0; 
                     
-                        while ((line = br.readLine()) != null && row < 10) { // อ่านไฟล์ทีละบรรทัดจนกว่าจะหมด หรือจนกว่าแถวจะครบ 10 แถว
-                            String[] numbers = line.split("\t"); // แยกบรรทัดที่อ่านมาเป็นส่วนๆ โดยใช้แท็บเป็นตัวคั่น
-                            for (int col = 0; col < numbers.length && col < 20; col++) { // วนลูปตามจำนวนคอลัมน์ในบรรทัดหรือจนกว่าจะครบ 20 คอลัมน์
-                                dataGrid[row][col] = numbers[col]; // เก็บข้อมูลแต่ละส่วนใน dataGrid ตำแหน่งที่สอดคล้องกัน
+                        while ((line = br.readLine()) != null && row < 10) { 
+                            String[] numbers = line.split("\t"); 
+                            for (int col = 0; col < numbers.length && col < 20; col++) { 
+                                dataGrid[row][col] = numbers[col]; 
                             }
-                            row++; // เพิ่มค่า row เพื่อไปจัดการแถวถัดไปใน dataGrid
+                            row++; 
                         }
                     } catch (IOException ex) {
-                        ex.printStackTrace(); // ถ้าเกิดข้อผิดพลาดในการอ่านไฟล์ จะพิมพ์รายละเอียดของข้อผิดพลาดออกมาในคอนโซล
+                        ex.printStackTrace(); 
                     }
 
                     int maxSize = 200;
@@ -226,23 +226,22 @@ public class PM {
 
                     for (String[] row : dataGrid) {
                         for (String element : row) {
-                            // ตรวจสอบจำนวนคีย์ใน HashMap ก่อนการเพิ่ม
                             if (pmValue.size() < maxSize) {
-                                pmValue.put(index, element); // เก็บค่าลงในแฮชแมป pmValue โดยใช้ index เป็นคีย์
-                                index++; // เพิ่ม index เพื่อเก็บค่าในตำแหน่งถัดไป
+                                pmValue.put(index, element); 
+                                index++; 
                             } else {
-                                break; // ออกจากลูปหากถึงขีดจำกัด
+                                break; 
                             }
                         }
                         if (pmValue.size() >= maxSize) {
-                            break; // ออกจากลูปหลักหากถึงขีดจำกัด
+                            break; 
                         }
                     }
                 }
                 pmProcess();
             }
         });
-        //////// OK
+        // OK
         btnOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 String s = tField2.getText();
@@ -269,7 +268,7 @@ public class PM {
                 ImageIcon icon = null;
                 icon = resizeIcon("img/pop.png", 150, 150);
                 if (icon != null) {
-                    background.setIcon(icon); // เปลี่ยนไอคอนของ JLabel ที่มีอยู่
+                    background.setIcon(icon);
                     panelR1.revalidate();
                     panelR1.repaint();
                 }
@@ -287,7 +286,7 @@ public class PM {
                 ImageIcon icon = null;
                 icon = resizeIcon("img/rain.png", 150, 150);
                 if (icon != null) {
-                    background.setIcon(icon); // เปลี่ยนไอคอนของ JLabel ที่มีอยู่
+                    background.setIcon(icon); 
                     panelR1.revalidate();
                     panelR1.repaint();
                 }
@@ -302,7 +301,7 @@ public class PM {
                 ImageIcon icon = null;
                 icon = resizeIcon("img/rain.png", 150, 150);
                 if (icon != null) {
-                    background.setIcon(icon); // เปลี่ยนไอคอนของ JLabel ที่มีอยู่
+                    background.setIcon(icon); 
                     panelR1.revalidate();
                     panelR1.repaint();
                 }
@@ -310,27 +309,26 @@ public class PM {
                 pmProcess();
             }
         });
-        setPeople(0);/////// set start 0
+        setPeople(0);
     }
 
-    //ปรับสีปุ่ม
+    //
     public void setColorButton(Button button ,int r ,int g ,int b,int r2, int g2 ,int b2){
 
         btnEvent BEvent = new btnEvent();
 
-        BEvent.MouseButtonColor(button, r, g, b, r2, g2, b2); // เปลี่ยนสีปุ่มเมื่อเมาส์เข้าไปในปุ่ม
-        button.setBackground(new Color(r,g,b)); // ปรับสีปุ่ม
+        BEvent.MouseButtonColor(button, r, g, b, r2, g2, b2); 
+        button.setBackground(new Color(r,g,b)); 
 
     }
-    // ปรับปุ่ม
+    // 
     public void  setButton(int y, int x,int w,int h,Button button){
         gbc.anchor = GridBagConstraints.SOUTHWEST;
-        gbc.insets = new Insets(5, 5, 10, 10); // เพิ่มระยะห่างรอบปุ่ม
-        // ปรับ ipad เพื่อปรับขนาดปุ่ม
+        gbc.insets = new Insets(5, 5, 10, 10); 
         gbc.ipadx = h;
         gbc.ipady = w; 
-        gbc.gridy = y;// ปรับ gridy เพื่อปรับแถวของปุ่มถัดไป
-        gbc.gridx = x;// ปรับ gridx เพื่อปรับตำแหน่งของปุ่มถัดไป
+        gbc.gridy = y;
+        gbc.gridx = x;
         panelR2.add(button, gbc);
         panel2.add(panelR2);
     }
@@ -338,14 +336,13 @@ public class PM {
     //ปรับ text
     public void setText(TextField tField,int y, int x,int w,int h){
         gbc.anchor = GridBagConstraints.SOUTHWEST;
-        gbc.insets = new Insets(5, 5, 10, 10); // เพิ่มระยะห่างรอบ text 
-        // ปรับ ipad เพื่อปรับขนาด text 
+        gbc.insets = new Insets(5, 5, 10, 10);
         gbc.ipadx = h;
         gbc.ipady = w; 
-        gbc.gridy = y;// ปรับ gridy เพื่อปรับแถวของ text ถัดไป
-        gbc.gridx = x;// ปรับ gridx เพื่อปรับตำแหน่งของ text ถัดไป
+        gbc.gridy = y;
+        gbc.gridx = x;
         panelR2.add(tField, gbc);
-        panel2.add(panelR2);//12
+        panel2.add(panelR2);
     }
 
     public void clearArea() {
@@ -371,11 +368,11 @@ public class PM {
     }
     public void setPeople(int addpeople)
     {
-        //int pop = 0;
-        int digitCount = String.valueOf(addpeople).length(); // นับจำนวนตัวเลข
-        int sum = (int) Math.pow(10, digitCount - 1); // ยกกำลัง (digitCount - 1 = จะได้เลขฐานมาแล้วเอา 10 ไปยกกำลัง)
+
+        int digitCount = String.valueOf(addpeople).length(); 
+        int sum = (int) Math.pow(10, digitCount - 1); 
         
-        for (int i = 0; i < 10; i++)  // เช่น 5000 นี้ได้ 4 เอา 4-1 = 3 10 กำลัง 3  = 1000
+        for (int i = 0; i < 10; i++)  //
         {
             for (int x = 0; x < 20; x++) 
             {
@@ -386,7 +383,7 @@ public class PM {
                 }
                 
                 Random random = new Random();
-                int randomNumber = addpeople + random.nextInt(sum); ///////////////////////////// ตรง addpeople
+                int randomNumber = addpeople + random.nextInt(sum); 
                 people[i][x] = randomNumber;
             }
         }
@@ -401,13 +398,11 @@ public class PM {
         int row = 0, col = 0;
         for (Map.Entry<Integer, String> entry : pmValue.entrySet()) {
             try {
-                // แปลงค่าจาก String เป็น int
                 int value = Integer.parseInt(entry.getValue());
-                
                 String colorName;
                 Random random = new Random();
 
-                if (col > 19) { //จัดการ array ให้เป้น row 10* col 20
+                if (col > 19) { 
                     col = 0;
                     row++;
                     if (row >= 10) { 
@@ -443,9 +438,9 @@ public class PM {
                     Parent[row][col] = (int) Math.round(people[row][col] * (randomSicks / 100.0));
                 }
                 
-                Healthy[row][col] = people[row][col]-Parent[row][col]; // หาจำนวนผู้ป่วย
-                Avg[row][col] = (Parent[row][col] / (double) people[row][col]) * 100; //หาค่าเฉลี่ย ผู้ป่วย/จำนวนประชากร
-                dust[row][col] = value; //ค่าPM
+                Healthy[row][col] = people[row][col]-Parent[row][col]; 
+                Avg[row][col] = (Parent[row][col] / (double) people[row][col]) * 100; 
+                dust[row][col] = value; 
 
                 showAreaColor(row, col, colorName);
                 col ++;

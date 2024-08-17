@@ -20,13 +20,11 @@ public class btnEvent {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                // เปลี่ยนสีปุ่มเมื่อเมาส์เข้าไปในปุ่ม
                 btn.setBackground(Color.WHITE);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                //ออก
                 btn.setBackground(new Color(r, g, b)); 
             }
 
@@ -47,13 +45,11 @@ public class btnEvent {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                // เปลี่ยนสีปุ่มเมื่อเมาส์เข้าไปในปุ่ม
                 btn.setBackground(new Color(r2, g2, b2));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                //ออก
                 btn.setBackground(new Color(r, g, b)); 
             }
 
