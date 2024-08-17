@@ -14,10 +14,9 @@ import java.awt.event.WindowEvent;
 public class ERRORPeople {
     private Frame frame; 
 
-    public void showERROR() {
-       //PM mp = new PM(); 
+    public void showERROR() { 
         frame = new Frame("ERROR"); 
-        Panel panel = new Panel(new GridBagLayout()); // ใช้ GridBagLayout
+        Panel panel = new Panel(new GridBagLayout()); 
 
         String[] names = {"ERROR", "The number of people must be in numbers. ","The number of people must be greater than 0."};
 
@@ -41,16 +40,15 @@ public class ERRORPeople {
             else{
                 lb.setFont(new Font("Arial", Font.BOLD, 16));
             }
-             // ปรับเป็นขนาด Font 
-            gbc.gridy = i; // ตำแหน่งrow
+ 
+            gbc.gridy = i; 
             panel.add(lb, gbc);
         }
 
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                frame.dispose(); // ปิด Frame (Destroy)
-                //mp.showPM();
+                frame.dispose(); 
                 Page.setPage(3);
             }
         });

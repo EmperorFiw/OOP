@@ -247,15 +247,23 @@ public class PM {
                 String s = tField2.getText();
                 char[] ch = s.toCharArray();
                 int x = 0;
+                int y = 0;
                 for (int i = 0; i < ch.length; i++) {
                     if (Character.isDigit(ch[i])) {
-                        x = Integer.parseInt(s);
+                        y = 0;
                     }
                     else{
-                        x = 0;
+                        y = 1;
                         break;
                     }
                 }
+                if(y == 0){
+                    x = Integer.parseInt(s);
+                }
+                else{
+                    x = 0;
+                }
+                
                 pmProcess(); // process when change population
                 
                 if(x != 0){

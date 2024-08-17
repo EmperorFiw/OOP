@@ -35,9 +35,9 @@ public class MainPage extends Frame{
 
         btnStart.setBackground(new Color(211, 211, 211)); 
         btnCreator.setBackground(new Color(211, 211, 211)); 
-        btnStart.setFont(new Font("Arial", Font.PLAIN, 60)); //font
+        btnStart.setFont(new Font("Arial", Font.PLAIN, 60)); 
         btnCreator.setFont(new Font("Arial", Font.PLAIN, 60));
-        gbc.insets = new Insets(20, 10, 10, 10); // เพิ่มระยะห่างรอบปุ่ม
+        gbc.insets = new Insets(20, 10, 10, 10); 
         gbc.ipadx = 280; //ความกว้าง
         gbc.ipady = 100; //ความสูง
         gbc.gridx = 0; //col
@@ -50,12 +50,11 @@ public class MainPage extends Frame{
         addWindowListener(new close());
         setVisible(true);
 
-        //Click
         btnStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Page.setPage(2);
-                setVisible(false); // ปิดหน้าต่างหลัก MainPage
+                setVisible(false); 
                 pm.showPM();
             }
         });
@@ -65,12 +64,11 @@ public class MainPage extends Frame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 Page.setPage(3);
-                cr.showCreator(); // show creator
-                setVisible(false); // ปิดหน้าต่างหลัก MainPage
+                cr.showCreator(); 
+                setVisible(false);
             }
         });
 
-        //Event
         be.addMoseEventBtn(btnStart,211,211,211);
         be.addMoseEventBtn(btnCreator,211,211,211);
     }
